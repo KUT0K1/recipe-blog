@@ -1,0 +1,103 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+
+// Alle Rezepte laden
+const recipes = await getCollection('recipes');
+---
+
+<BaseLayout>
+  <div class="container">
+    <h1>🍳 Rezeptblog</h1>
+    <p class="intro">Willkommen! Hier findest du leckere und einfache Rezepte zum Nachkochen.</p>
+
+    {recipes.length === 0 ? (
+      <p class="no-recipes">Noch keine Rezepte verfügbar. Komm bald wieder!</p>
+    ) : (
+      <div class="recipes-grid">
+        {recipes.map((recipe) => (
+          <a href={`/recipe-blog/recipes/${recipe.slug}/`} class="recipe-card">
+            <div class="recipe-card-content">
+              <h2>{recipe.data.title}</h2>
+              <p class="servings">👥 {recipe.data.servings} Portionen</p>
+              <p class="ingredients-count">🥘 {recipe.data.ingredients.reduce((sum, group) => sum + group.items.length, 0)} Zutaten</p>
+            </div>
+          </a>
+        ))}
+      </div>
+    )}
+  </div>
+</BaseLayout>
+
+<style>
+  .container {
+    max-width: 900px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    color: #2c3e50;
+  }
+
+  .intro {
+    font-size: 1.1rem;
+    color: #666;
+    margin-bottom: 2rem;
+  }
+
+  .no-recipes {
+    text-align: center;
+    color: #999;
+    padding: 2rem;
+  }
+
+  .recipes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+
+  .recipe-card {
+    display: block;
+    padding: 1.5rem;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+    background: #fafafa;
+  }
+
+  .recipe-card:hover {
+    border-color: #2c3e50;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+  }
+
+  .recipe-card-content h2 {
+    font-size: 1.3rem;
+    margin: 0 0 0.5rem 0;
+    color: #2c3e50;
+  }
+
+  .servings,
+  .ingredients-count {
+    font-size: 0.95rem;
+    color: #666;
+    margin: 0.25rem 0;
+  }
+
+  @media (max-width: 768px) {
+    h1 {
+      font-size: 2rem;
+    }
+
+    .recipes-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
