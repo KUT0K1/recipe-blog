@@ -1,9 +1,8 @@
 ---
-import { useParams } from 'astro:useParams';
 import { getEntryBySlug } from 'astro:content';
 import BaseLayout from '@layouts/BaseLayout.astro';
 
-const { slug } = useParams();
+const { slug } = Astro.params;
 const recipe = await getEntryBySlug('recipes', slug);
 
 if (!recipe) {
@@ -18,8 +17,13 @@ const { title, servings, ingredients, steps } = recipe.data;
     <a href="/">Zurück zur Übersicht</a>
     <h1>{title}</h1>
     <label for="portion-input">Portionen:</label>
-    <input id="portion-input" type="number" min="1" value={servings} 
-      onInput="updatePortions(this.value)" />
+    <input
+      id="portion-input"
+      type="number"
+      min="1"
+      value={servings}
+      onInput="updatePortions(this.value)"
+    />
 
     <h2>Zutaten</h2>
     {ingredients.map((group) => (
