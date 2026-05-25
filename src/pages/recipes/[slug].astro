@@ -1,0 +1,46 @@
+---
+import { useParams } from 'astro:useParams';
+import { getEntryBySlug } from 'astro:content';
+import BaseLayout from '@layouts/BaseLayout.astro';
+
+const { slug } = useParams();
+const recipe = await getEntryBySlug('recipes', slug);
+
+if (!recipe) {
+  throw new Error('Rezept nicht gefunden');
+}
+
+const { title, servings, ingredients, steps } = recipe.data;
+---
+
+<BaseLayout>
+  <div>
+    <a href="/">Zurück zur Übersicht</a>
+    <h1>{title}</h1>
+    <label for="portion-input">Portionen:</label>
+    <input id="portion-input" type="number" min="1" value={servings} 
+      onInput="updatePortions(this.value)" />
+
+    <h2>Zutaten</h2>
+    {ingredients.map((group) => (
+      <div>
+        <h3>{group.section}</h3>
+        <ul>
+          {group.items.map((item) => (
+            <li>
+              <span data-amount={item.amount}>{item.amount}</span> {item.unit} {item.name}
+            </li>
+          ))}
+        </ul>
+      </div>
+    ))}
+
+    <h2>Zubereitung</h2>
+    <ol>
+      {steps.map((step) => (
+        <li>{step}</li>
+      ))}
+    </ol>
+  </div>
+  <script src="/scripts/scaling.js"></script>
+</BaseLayout>
