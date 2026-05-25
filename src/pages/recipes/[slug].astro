@@ -1,14 +1,16 @@
 ---
-import { getEntryBySlug } from 'astro:content';
+import { getCollection, getEntryBySlug } from 'astro:content';
 import BaseLayout from '@layouts/BaseLayout.astro';
 
-const { slug } = Astro.params;
-const recipe = await getEntryBySlug('recipes', slug);
-
-if (!recipe) {
-  throw new Error('Rezept nicht gefunden');
+export async function getStaticPaths() {
+  const recipes = await getCollection('recipes');
+  return recipes.map(recipe => ({
+    params: { slug: recipe.slug },
+    props: { recipe }
+  }));
 }
 
+const { recipe } = Astro.props;
 const { title, servings, ingredients, steps } = recipe.data;
 ---
 
