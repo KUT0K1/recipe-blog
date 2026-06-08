@@ -12,25 +12,125 @@ body {
 header {
   background: #4CAF50;
   color: white;
-  padding: 1rem;
-  text-align: center;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+header h1 {
+  margin: 0;
   font-size: 1.5rem;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+header nav {
+  display: flex;
+  gap: 1rem;
+}
+
+header nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: opacity 0.3s ease;
+}
+
+header nav a:hover {
+  opacity: 0.8;
+  text-decoration: underline;
 }
 
 /* Main container */
 main {
-  max-width: 900px;
-  margin: 2rem auto;
-  padding: 1rem;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* Section styles */
+.section {
+  padding: 3rem 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.section h2 {
+  font-size: 2rem;
+  color: #333;
+  margin-bottom: 1.5rem;
+  margin-top: 0;
+}
+
+.section.intro {
+  background: #fafafa;
+  text-align: center;
+}
+
+.section.intro p {
+  font-size: 1.1rem;
+  color: #555;
+}
+
+.section.recipes {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 3rem 1.5rem;
+}
+
+/* Recipe card styles */
+.recipe-card {
+  background: #fff;
+  border: 1px solid #e1e1e1;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  text-align: center;
+}
+
+.recipe-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.recipe-card h3 {
+  padding: 1.5rem 1rem 0 1rem;
+  margin: 0;
+  font-size: 1.3rem;
+  color: #333;
+}
+
+.recipe-card p {
+  padding: 0.5rem 1rem;
+  color: #666;
+}
+
+.recipe-card a {
+  display: inline-block;
+  margin: 1rem 1rem;
+  padding: 0.5rem 1rem;
+  background: #4CAF50;
+  color: white;
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background 0.3s ease;
+}
+
+.recipe-card a:hover {
+  background: #45a049;
+  text-decoration: none;
 }
 
 /* Recipe list */
 h2 {
-  color: #4CAF50;
+  color: #333;
 }
 
 a {
@@ -51,12 +151,73 @@ ul {
 li {
   margin: 0.5rem 0;
   font-size: 1rem;
+  padding: 0.5rem 0;
 }
 
 /* Footer */
 footer {
   text-align: center;
   background: #f4f4f4;
-  padding: 1rem;
-  margin-top: 2rem;
+  padding: 1.5rem;
+  margin-top: 5rem;
+  border-top: 1px solid #e1e1e1;
+  color: #555;
+  font-size: 0.9rem;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  header {
+    flex-direction: column;
+    gap: 1rem;
+  }
+
+  header nav {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .section {
+    padding: 2rem 1rem;
+  }
+
+  .section h2 {
+    font-size: 1.5rem;
+  }
+
+  .recipe-card {
+    width: 100%;
+  }
+}
+
+/* Input styling for portion adjuster */
+input[type="number"] {
+  padding: 0.5rem;
+  font-size: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  margin: 0.5rem 0;
+}
+
+input[type="number"]:focus {
+  outline: none;
+  border-color: #4CAF50;
+  box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+}
+
+/* Back link styling */
+.back-link {
+  display: inline-block;
+  margin-bottom: 1rem;
+  padding: 0.5rem 1rem;
+  background: #f0f0f0;
+  border-radius: 5px;
+  text-decoration: none;
+  color: #333;
+  transition: background 0.3s ease;
+}
+
+.back-link:hover {
+  background: #e0e0e0;
+  text-decoration: none;
 }
