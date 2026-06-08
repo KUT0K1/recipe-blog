@@ -1,32 +1,36 @@
+/* Base styles */
 body {
-  font-family: system-ui, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   margin: 0;
   padding: 0;
-  line-height: 1.5;
-  background: #f9f9f9;
+  line-height: 1.6;
+  background: #fafafa;
   color: #333;
 }
 
+/* Header */
 header {
-  background: #333;
-  color: #fff;
-  padding: 1rem;
-}
-
-footer {
-  background: #f1f1f1;
-  color: #555;
+  background: #4CAF50;
+  color: white;
   padding: 1rem;
   text-align: center;
+  font-size: 1.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Main container */
 main {
-  max-width: 800px;
+  max-width: 900px;
   margin: 2rem auto;
   padding: 1rem;
-  background: #fff;
+  background: white;
   border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+}
+
+/* Recipe list */
+h2 {
+  color: #4CAF50;
 }
 
 a {
@@ -38,11 +42,21 @@ a:hover {
   text-decoration: underline;
 }
 
+/* Ingredient styling */
 ul {
   list-style: none;
   padding: 0;
 }
 
 li {
-  margin: 0 0 1rem;
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  background: #f4f4f4;
+  padding: 1rem;
+  margin-top: 2rem;
 }
