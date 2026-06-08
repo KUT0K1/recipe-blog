@@ -20,6 +20,8 @@ header {
   top: 0;
   z-index: 100;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box;
+  width: 100%;
 }
 
 header h1 {
@@ -46,18 +48,22 @@ header nav a:hover {
 
 /* Main container */
 main {
-  max-width: 1100px;
+  max-width: 100%;
   margin: 0 auto;
   padding: 0;
   background: transparent;
   box-shadow: none;
+  box-sizing: border-box;
+  width: 100%;
 }
 
 /* Section styles */
 .section {
   padding: 3rem 1.5rem;
-  max-width: 1100px;
+  max-width: 100%;
   margin: 0 auto;
+  box-sizing: border-box;
+  width: 100%;
 }
 
 .section h2 {
@@ -79,9 +85,13 @@ main {
 
 .section.recipes {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 2rem;
   padding: 3rem 1.5rem;
+  max-width: 1100px;
+  margin: 0 auto;
+  box-sizing: border-box;
+  width: 100%;
 }
 
 /* Recipe card styles */
@@ -93,6 +103,7 @@ main {
   overflow: hidden;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   text-align: center;
+  box-sizing: border-box;
 }
 
 .recipe-card:hover {
@@ -163,6 +174,8 @@ footer {
   border-top: 1px solid #e1e1e1;
   color: #555;
   font-size: 0.9rem;
+  box-sizing: border-box;
+  width: 100%;
 }
 
 /* Responsive design */
@@ -170,11 +183,26 @@ footer {
   header {
     flex-direction: column;
     gap: 1rem;
+    padding: 1rem;
+  }
+
+  header h1 {
+    font-size: 1.2rem;
   }
 
   header nav {
-    flex-direction: column;
+    flex-direction: row;
     gap: 0.5rem;
+    width: 100%;
+    justify-content: center;
+  }
+
+  header nav a {
+    font-size: 0.9rem;
+  }
+
+  main {
+    overflow-x: hidden;
   }
 
   .section {
@@ -183,6 +211,11 @@ footer {
 
   .section h2 {
     font-size: 1.5rem;
+  }
+
+  .section.recipes {
+    grid-template-columns: 1fr;
+    padding: 2rem 1rem;
   }
 
   .recipe-card {
@@ -197,6 +230,7 @@ input[type="number"] {
   border: 1px solid #ddd;
   border-radius: 5px;
   margin: 0.5rem 0;
+  box-sizing: border-box;
 }
 
 input[type="number"]:focus {
