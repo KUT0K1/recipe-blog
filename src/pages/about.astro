@@ -1,22 +1,10 @@
 ---
+import BaseLayout from '@layouts/BaseLayout.astro';
 ---
 
-<header>
-  <h1>Über uns</h1>
-  <nav>
-    <a href="/">Startseite</a>
-    <a href="/recipes">Rezepte</a>
-    <a href="/about">Über uns</a>
-  </nav>
-</header>
-
-<main>
+<BaseLayout>
   <section class="section intro">
     <h2>Wer wir sind</h2>
     <p>Wir sind leidenschaftliche Hobbyköche, die ihre besten Rezepte teilen möchten. Einfach, lecker und für jedermann geeignet!</p>
   </section>
-</main>
-
-<footer>
-  <p>&copy; 2026 Rezept-Blog. Alle Rechte vorbehalten.</p>
-</footer>
+</BaseLayout>
