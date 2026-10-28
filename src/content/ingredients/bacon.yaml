@@ -1,0 +1,6 @@
+id: bacon
+category: meat
+names:
+  de: { singular: Speck }
+  en: { singular: bacon }
+defaultUnit: g

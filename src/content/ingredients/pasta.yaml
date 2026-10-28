@@ -1,0 +1,6 @@
+id: pasta
+category: grains
+names:
+  de: { singular: Pasta }
+  en: { singular: pasta }
+defaultUnit: g

@@ -1,0 +1,16 @@
+locale: de
+slug: haehnchen-speck-pasta
+title: Cremige Hähnchen-Speck-Pasta
+description: Pasta in cremiger Sahnesauce mit Hähnchen, Speck und Parmesan.
+imageAlt:
+  cover.webp: Platzhalterbild für die Hähnchen-Speck-Pasta
+ingredientGroups:
+  pasta: Pasta
+  sauce: Sahnesauce
+ingredientNotes:
+  salt: für das Nudelwasser
+steps:
+  cook-pasta: Pasta in Salzwasser al dente kochen.
+  fry-bacon-and-chicken: Speck in einer Pfanne auslassen, Hähnchen anbraten und Knoblauch hinzufügen.
+  add-cream: Sahne hinzufügen und kurz köcheln lassen.
+  finish: Parmesan einrühren und die al dente gekochte Pasta unterheben.

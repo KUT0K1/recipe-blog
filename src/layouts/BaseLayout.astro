@@ -1,31 +1,141 @@
 ---
-/**
- * Base layout for the recipe blog
- * Wraps content with a consistent header, navigation, and footer for the site
- */
-import '../styles/main.css';
+import "../styles/global.css";
+import { locales, localeMeta, defaultLocale, type Locale } from "../config/locales";
+import { t } from "../i18n/ui";
+import { absoluteUrl, paths, withBase } from "../lib/urls";
+import { jsonLdScript } from "../lib/seo";
+
+interface Props {
+  locale: Locale;
+  title: string;
+  description?: string;
+  /** Site-relative URLs of this page per locale; only existing routes. */
+  alternates?: Partial<Record<Locale, string>>;
+  image?: string;
+  ogType?: "website" | "article";
+  jsonLd?: unknown;
+  noindex?: boolean;
+}
+
+const {
+  locale,
+  title,
+  description,
+  alternates = {},
+  image,
+  ogType = "website",
+  jsonLd,
+  noindex = false,
+} = Astro.props;
+const strings = t(locale);
+const pageTitle = title === strings.siteName ? title : `${title} · ${strings.siteName}`;
+const metaDescription = description ?? strings.siteDescription;
+const canonical = absoluteUrl(alternates[locale] ?? Astro.url.pathname, Astro.site);
+const languageLinks = locales.flatMap((l) => {
+  const href = alternates[l];
+  return href ? [{ locale: l, href }] : [];
+});
+const xDefault = alternates[defaultLocale];
+const nav = [
+  { href: paths.home(locale), label: strings.nav.home },
+  { href: paths.recipes(locale), label: strings.nav.recipes },
+  { href: paths.about(locale), label: strings.nav.about },
+];
+const current = Astro.url.pathname;
+const isCurrent = (href: string) =>
+  href === paths.home(locale) ? current === href : current.startsWith(href);
 ---
 
-<!DOCTYPE html>
-<html lang="de">
+<!doctype html>
+<html lang={locale}>
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Rezept-Blog</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{pageTitle}</title>
+    <meta name="description" content={metaDescription} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <link rel="canonical" href={canonical} />
+    <link rel="icon" type="image/svg+xml" href={withBase("favicon.svg")} />
+    <link rel="sitemap" href={withBase("sitemap-index.xml")} />
+    {languageLinks.length > 1 &&
+      languageLinks.map((link) => (
+        <link rel="alternate" hreflang={link.locale} href={absoluteUrl(link.href, Astro.site)} />
+      ))}
+    {languageLinks.length > 1 && xDefault && (
+      <link rel="alternate" hreflang="x-default" href={absoluteUrl(xDefault, Astro.site)} />
+    )}
+    <meta property="og:type" content={ogType} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={metaDescription} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:site_name" content={strings.siteName} />
+    <meta property="og:locale" content={localeMeta[locale].ogLocale} />
+    {image && <meta property="og:image" content={absoluteUrl(image, Astro.site)} />}
+    <meta name="twitter:card" content={image ? "summary_large_image" : "summary"} />
+    {jsonLd && <script type="application/ld+json" set:html={jsonLdScript(jsonLd)} />}
   </head>
-  <body>
-    <header>
-      <h1>Rezept-Blog</h1>
-      <nav>
-        <a href="/recipe-blog/">Startseite</a>
-        <a href="/recipe-blog/about">Über uns</a>
-      </nav>
+  <body class="flex min-h-screen flex-col">
+    <a
+      href="#main"
+      class="sr-only z-50 rounded bg-white px-4 py-2 focus:not-sr-only focus:absolute focus:top-2 focus:left-2"
+    >
+      {strings.skipToContent}
+    </a>
+    <header class="border-b border-stone-200 bg-white">
+      <div class="mx-auto flex max-w-5xl flex-wrap items-center justify-between gap-x-6 gap-y-2 px-4 py-3">
+        <a
+          href={paths.home(locale)}
+          class="font-serif text-xl font-bold text-stone-900 no-underline hover:underline"
+        >
+          {strings.siteName}
+        </a>
+        <div class="flex flex-wrap items-center gap-x-5 gap-y-2">
+          <nav aria-label={strings.nav.main}>
+            <ul class="flex flex-wrap gap-x-4 gap-y-1">
+              {nav.map((item) => (
+                <li>
+                  <a
+                    href={item.href}
+                    aria-current={isCurrent(item.href) ? "page" : undefined}
+                    class="font-medium text-stone-700 aria-[current=page]:text-brand-700 aria-[current=page]:underline"
+                  >
+                    {item.label}
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </nav>
+          {languageLinks.length > 1 && (
+            <nav aria-label={strings.languageSwitch}>
+              <ul class="flex gap-1 text-sm">
+                {languageLinks.map((link) => (
+                  <li>
+                    <a
+                      href={link.href}
+                      hreflang={link.locale}
+                      lang={link.locale}
+                      aria-current={link.locale === locale ? "true" : undefined}
+                      title={localeMeta[link.locale].label}
+                      class="rounded px-2 py-1 font-semibold text-stone-600 uppercase no-underline hover:bg-stone-100 aria-[current=true]:bg-brand-100 aria-[current=true]:text-brand-900"
+                    >
+                      <span class="sr-only">{localeMeta[link.locale].label}</span>
+                      <span aria-hidden="true">{link.locale}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </nav>
+          )}
+        </div>
+      </div>
     </header>
-    <main>
+    <main id="main" class="mx-auto w-full max-w-5xl flex-1 px-4 py-8">
       <slot />
     </main>
-    <footer>
-      <p>&copy; 2026 Rezept-Blog. Alle Rechte vorbehalten.</p>
+    <footer class="border-t border-stone-200 bg-white">
+      <p class="mx-auto max-w-5xl px-4 py-6 text-sm text-stone-600">
+        {`© ${new Date().getFullYear()} ${strings.siteName} · ${strings.footer}`}
+      </p>
     </footer>
   </body>
 </html>

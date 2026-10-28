@@ -1,0 +1,127 @@
+---
+import { Picture, getImage } from "astro:assets";
+import type { LocalizedImage } from "../lib/recipes";
+import type { UiStrings } from "../i18n/ui";
+
+interface Props {
+  images: LocalizedImage[];
+  strings: UiStrings;
+}
+
+const { images, strings } = Astro.props;
+const full = await Promise.all(
+  images.map((img) => getImage({ src: img.image, width: 1600, format: "webp" })),
+);
+---
+
+{images.length > 0 && (
+  <section aria-labelledby="gallery-heading" class="mt-10" data-gallery>
+    <h2 id="gallery-heading" class="mb-4 text-2xl font-bold">
+      {strings.recipe.gallery}
+    </h2>
+    <ul class="grid grid-cols-2 gap-3 sm:grid-cols-3">
+      {images.map((img, index) => (
+        <li>
+          <a
+            href={full[index]?.src}
+            data-lightbox-item
+            data-alt={img.alt}
+            aria-label={strings.recipe.openImage(img.alt)}
+            class="block overflow-hidden rounded-lg ring-1 ring-stone-200"
+          >
+            <Picture
+              src={img.image}
+              alt={img.alt}
+              widths={[320, 480, 720]}
+              sizes="(min-width: 640px) 33vw, 50vw"
+              formats={["avif", "webp"]}
+              fallbackFormat="jpg"
+              loading="lazy"
+              class="aspect-square w-full object-cover transition hover:scale-105"
+            />
+          </a>
+        </li>
+      ))}
+    </ul>
+    <dialog
+      data-lightbox
+      aria-label={strings.recipe.gallery}
+      class="m-auto max-h-[95vh] max-w-[95vw] bg-transparent p-0 backdrop:bg-black/85"
+    >
+      <figure class="flex flex-col items-center gap-3">
+        <img data-lightbox-image alt="" class="max-h-[80vh] max-w-full rounded-lg object-contain" />
+        <figcaption data-lightbox-caption class="px-4 text-center text-white" />
+      </figure>
+      <div class="mt-3 flex justify-center gap-3">
+        <button
+          type="button"
+          data-lightbox-prev
+          class="rounded-md bg-white px-4 py-2 font-semibold"
+        >
+          ‹ <span class="sr-only">{strings.lightbox.previous}</span>
+        </button>
+        <button
+          type="button"
+          data-lightbox-close
+          class="rounded-md bg-white px-4 py-2 font-semibold"
+        >
+          {strings.lightbox.close}
+        </button>
+        <button
+          type="button"
+          data-lightbox-next
+          class="rounded-md bg-white px-4 py-2 font-semibold"
+        >
+          <span class="sr-only">{strings.lightbox.next}</span> ›
+        </button>
+      </div>
+    </dialog>
+  </section>
+)}
+
+<script>
+  // Progressive enhancement: without JS the thumbnails link to the full image.
+  // <dialog> provides Escape-to-close and focus containment; focus returns to
+  // the thumbnail that opened it.
+  for (const gallery of document.querySelectorAll<HTMLElement>("[data-gallery]")) {
+    const dialog = gallery.querySelector<HTMLDialogElement>("[data-lightbox]");
+    const img = gallery.querySelector<HTMLImageElement>("[data-lightbox-image]");
+    const caption = gallery.querySelector<HTMLElement>("[data-lightbox-caption]");
+    const items = [...gallery.querySelectorAll<HTMLAnchorElement>("[data-lightbox-item]")];
+    if (!dialog || !img || !caption || items.length === 0) continue;
+
+    let index = 0;
+    let opener: HTMLElement | null = null;
+    const show = (next: number) => {
+      index = (next + items.length) % items.length;
+      const item = items[index]!;
+      img.src = item.href;
+      img.alt = item.dataset.alt ?? "";
+      caption.textContent = item.dataset.alt ?? "";
+    };
+
+    items.forEach((item, i) =>
+      item.addEventListener("click", (event) => {
+        event.preventDefault();
+        opener = item;
+        show(i);
+        dialog.showModal();
+      }),
+    );
+    const single = items.length < 2;
+    for (const sel of ["[data-lightbox-prev]", "[data-lightbox-next]"]) {
+      gallery.querySelector<HTMLElement>(sel)?.toggleAttribute("hidden", single);
+    }
+    gallery.querySelector("[data-lightbox-prev]")?.addEventListener("click", () => show(index - 1));
+    gallery.querySelector("[data-lightbox-next]")?.addEventListener("click", () => show(index + 1));
+    gallery.querySelector("[data-lightbox-close]")?.addEventListener("click", () => dialog.close());
+    dialog.addEventListener("keydown", (event) => {
+      if (event.key === "ArrowLeft") show(index - 1);
+      if (event.key === "ArrowRight") show(index + 1);
+    });
+    dialog.addEventListener("click", (event) => {
+      if (event.target === dialog) dialog.close();
+    });
+    dialog.addEventListener("close", () => opener?.focus());
+  }
+</script>

@@ -1,0 +1,43 @@
+id: chicken-bacon-pasta
+servings: 4
+category: main-dishes
+tags: [pasta, chicken, quick]
+time:
+  preparationMinutes: 10
+  cookingMinutes: 20
+images:
+  cover: cover.webp
+ingredients:
+  - id: pasta
+    group: pasta
+    amount: 400
+    unit: g
+  - id: salt
+    group: pasta
+    amount: null
+    unit: null
+  - id: chicken-breast
+    group: sauce
+    amount: 200
+    unit: g
+  - id: bacon
+    group: sauce
+    amount: 100
+    unit: g
+  - id: cream
+    group: sauce
+    amount: 200
+    unit: ml
+  - id: garlic
+    group: sauce
+    amount: 1
+    unit: clove
+  - id: parmesan
+    group: sauce
+    amount: 50
+    unit: g
+steps:
+  - id: cook-pasta
+  - id: fry-bacon-and-chicken
+  - id: add-cream
+  - id: finish

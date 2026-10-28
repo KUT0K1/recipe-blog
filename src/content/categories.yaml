@@ -1,0 +1,3 @@
+# Recipe categories. Keys are stable IDs referenced by recipe.yaml.
+main-dishes: { de: Hauptgerichte, en: Main dishes }
+desserts: { de: Desserts, en: Desserts }

@@ -1,0 +1,6 @@
+id: mascarpone
+category: dairy
+names:
+  de: { singular: Mascarpone }
+  en: { singular: mascarpone }
+defaultUnit: g

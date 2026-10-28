@@ -1,0 +1,41 @@
+id: biscoff-no-bake-cheesecake
+servings: 8
+category: desserts
+tags: [cake, no-bake]
+time:
+  preparationMinutes: 25
+  restingMinutes: 240
+images:
+  cover: cover.webp
+ingredients:
+  - id: biscuits
+    group: crust
+    amount: 200
+    unit: g
+  - id: butter
+    group: crust
+    amount: 100
+    unit: g
+  - id: biscoff-spread
+    group: filling
+    amount: 400
+    unit: g
+  - id: mascarpone
+    group: filling
+    amount: 250
+    unit: g
+  - id: quark
+    group: filling
+    amount: 250
+    unit: g
+  - id: cream
+    group: filling
+    amount: 200
+    unit: ml
+steps:
+  - id: crumble-biscuits
+  - id: press-crust
+  - id: mix-filling
+  - id: whip-cream
+  - id: assemble-and-chill
+    durationMinutes: 240

@@ -1,0 +1,48 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import RecipeCard from "../../components/RecipeCard";
+import { locales, type Locale } from "../../config/locales";
+import { t } from "../../i18n/ui";
+import { toCardData } from "../../lib/cards";
+import { getRecipes } from "../../lib/recipes";
+import { paths } from "../../lib/urls";
+
+export function getStaticPaths() {
+  return locales.map((lang) => ({ params: { lang } }));
+}
+
+const locale = Astro.params.lang as Locale;
+const strings = t(locale);
+const recipes = await getRecipes(locale);
+const cards = await Promise.all(recipes.slice(0, 6).map((r) => toCardData(r, locale)));
+const alternates = Object.fromEntries(locales.map((l) => [l, paths.home(l)]));
+---
+
+<BaseLayout locale={locale} title={strings.siteName} alternates={alternates}>
+  <section class="mb-10 rounded-2xl bg-brand-50 px-6 py-10 ring-1 ring-brand-100">
+    <h1 class="mb-3 text-4xl font-bold">{strings.home.title}</h1>
+    <p class="max-w-2xl text-lg text-stone-700">{strings.home.intro}</p>
+  </section>
+
+  <section aria-labelledby="latest-heading">
+    <div class="mb-4 flex flex-wrap items-baseline justify-between gap-2">
+      <h2 id="latest-heading" class="text-2xl font-bold">
+        {strings.home.latest}
+      </h2>
+      <a href={paths.recipes(locale)} class="font-medium">
+        {strings.home.allRecipes} →
+      </a>
+    </div>
+    {cards.length === 0 ? (
+      <p class="py-8 text-center text-stone-600">{strings.recipes.empty}</p>
+    ) : (
+      <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {cards.map((card) => (
+          <li>
+            <RecipeCard card={card} />
+          </li>
+        ))}
+      </ul>
+    )}
+  </section>
+</BaseLayout>

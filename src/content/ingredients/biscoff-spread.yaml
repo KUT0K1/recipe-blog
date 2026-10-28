@@ -1,0 +1,6 @@
+id: biscoff-spread
+category: spreads
+names:
+  de: { singular: Biscoff-Creme }
+  en: { singular: Biscoff spread }
+defaultUnit: g

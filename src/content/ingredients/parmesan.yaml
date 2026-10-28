@@ -1,0 +1,6 @@
+id: parmesan
+category: dairy
+names:
+  de: { singular: Parmesan }
+  en: { singular: Parmesan }
+defaultUnit: g

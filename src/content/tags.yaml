@@ -1,0 +1,6 @@
+# Recipe tags. Keys are stable IDs referenced by recipe.yaml.
+cake: { de: Kuchen, en: Cake }
+chicken: { de: Hähnchen, en: Chicken }
+no-bake: { de: Ohne Backen, en: No-bake }
+pasta: { de: Pasta, en: Pasta }
+quick: { de: Schnell, en: Quick }

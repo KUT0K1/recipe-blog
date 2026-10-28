@@ -1,0 +1,6 @@
+id: garlic
+category: vegetables
+names:
+  de: { singular: Knoblauch }
+  en: { singular: garlic }
+defaultUnit: clove

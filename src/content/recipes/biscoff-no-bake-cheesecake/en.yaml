@@ -1,0 +1,17 @@
+locale: en
+slug: biscoff-no-bake-cheesecake
+title: Biscoff No-Bake Cheesecake
+description: Creamy no-bake cheesecake with a biscuit base and Biscoff spread.
+imageAlt:
+  cover.webp: Placeholder image for the Biscoff no-bake cheesecake
+ingredientGroups:
+  crust: Base
+  filling: Filling
+ingredientNotes:
+  butter: melted
+steps:
+  crumble-biscuits: Crush the biscuits finely and mix them with the melted butter.
+  press-crust: Press the mixture into a springform tin and chill.
+  mix-filling: Beat the mascarpone, quark and Biscoff spread until smooth.
+  whip-cream: Whip the cream until stiff and fold it in.
+  assemble-and-chill: Spread the filling over the base and chill for at least 4 hours.

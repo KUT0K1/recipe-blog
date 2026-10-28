@@ -1,0 +1,16 @@
+locale: en
+slug: creamy-chicken-bacon-pasta
+title: Creamy Chicken and Bacon Pasta
+description: Pasta in a creamy sauce with chicken, bacon and Parmesan.
+imageAlt:
+  cover.webp: Placeholder image for the chicken and bacon pasta
+ingredientGroups:
+  pasta: Pasta
+  sauce: Cream sauce
+ingredientNotes:
+  salt: for the pasta water
+steps:
+  cook-pasta: Cook the pasta in salted water until al dente.
+  fry-bacon-and-chicken: Render the bacon in a pan, brown the chicken and add the garlic.
+  add-cream: Add the cream and let it simmer briefly.
+  finish: Stir in the Parmesan and toss with the cooked pasta.
