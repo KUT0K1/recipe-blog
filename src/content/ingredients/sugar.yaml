@@ -1,0 +1,6 @@
+id: sugar
+category: baking
+names:
+  de: { singular: Zucker }
+  en: { singular: sugar }
+defaultUnit: g

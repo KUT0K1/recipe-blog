@@ -1,0 +1,6 @@
+id: milk
+category: dairy
+names:
+  de: { singular: Milch }
+  en: { singular: milk }
+defaultUnit: ml

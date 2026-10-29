@@ -1,0 +1,6 @@
+id: sour-cream
+category: dairy
+names:
+  de: { singular: Schmand }
+  en: { singular: soured cream }
+defaultUnit: g

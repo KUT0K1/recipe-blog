@@ -1,0 +1,6 @@
+id: edam
+category: dairy
+names:
+  de: { singular: Edamer }
+  en: { singular: Edam }
+defaultUnit: g

@@ -1,0 +1,19 @@
+locale: de
+slug: kaese-oregano-baguette
+title: Käse-Oregano-Baguette
+description: Vier knusprige Baguettes aus Hefeteig mit Olivenöl, überbacken mit Käse und Oregano.
+imageAlt:
+  cover.webp: Platzhalterbild für das Käse-Oregano-Baguette
+ingredientGroups:
+  dough: Teig
+  topping: Belag
+ingredientNotes:
+  water: lauwarm
+  parmesan: oder Gouda
+steps:
+  activate-yeast: Wasser, Hefe und Zucker verrühren und ca. 5 Minuten stehen lassen.
+  knead: Mehl, Salz und Hefewasser in eine Schüssel geben und verkneten. Anschließend das Olivenöl hinzufügen und mindestens 10 Minuten mit dem Knethaken kneten (20 Minuten mit der Hand).
+  first-rise: Den Teig mindestens 45 Minuten abgedeckt bei Raumtemperatur gehen lassen.
+  shape: Den Teig in 4 gleich große Portionen teilen, zu Baguettes formen und weitere 15 Minuten gehen lassen. In der Zwischenzeit Käse und Oregano miteinander vermischen.
+  top: Die Teiglinge mit Wasser besprühen oder bestreichen und die Käse-Oregano-Mischung darauf verteilen.
+  bake: Bei 180 °C Ober-/Unterhitze ca. 25 Minuten backen.

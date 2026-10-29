@@ -1,0 +1,17 @@
+locale: en
+slug: potato-soup
+title: Potato Soup
+description: Smooth potato soup with soup vegetables and frankfurters – serves 6–8.
+imageAlt:
+  cover.webp: Placeholder image for the potato soup
+ingredientNotes:
+  potato: floury (waxy potatoes need about 10–15 minutes longer)
+  sausages: or a ring of Fleischwurst (German bologna-style sausage)
+steps:
+  prepare-vegetables: Wash, peel and roughly dice the potatoes. Wash, trim and finely dice the soup vegetables.
+  simmer: Put the potatoes, soup vegetables and stock in a pot, bring to the boil and simmer, covered, for 20–25 minutes.
+  blend: Add the milk and purée the soup until smooth. Reheat and season with salt and pepper.
+  serve: Slice the frankfurters into thin rings and add them to the soup.
+notes:
+  - "Speed tip: Use 400 g frozen soup vegetables instead of fresh ones."
+  - "Storage tip: The soup freezes well (without the sausages)."

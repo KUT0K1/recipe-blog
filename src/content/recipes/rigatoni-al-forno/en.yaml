@@ -1,0 +1,20 @@
+locale: en
+slug: rigatoni-al-forno
+title: Rigatoni al Forno
+description: Baked rigatoni in a creamy minced meat and tomato sauce with cooked ham and Edam.
+imageAlt:
+  cover.webp: Placeholder image for rigatoni al forno
+ingredientGroups:
+  sauce: Sauce
+  pasta: Pasta
+  topping: Topping
+ingredientNotes:
+  olive-oil: for frying
+  tomato-paste: 1–2 tbsp of it for frying
+  edam: grated
+steps:
+  brown-meat: Heat a little olive oil, add the minced meat and fry, stirring, until browned and crumbly. Stir in 1–2 tbsp of the tomato purée and fry briefly.
+  make-sauce: Deglaze with the vegetable stock, add the cream and bring to the boil. Stir in the remaining tomato purée and simmer the sauce for at least 30 minutes. Then melt the butter in it and season with salt, cayenne pepper and Parmesan.
+  cook-pasta: Cook the rigatoni in plenty of salted water until very al dente, following the packet instructions and stirring occasionally. Drain in a colander and return to the pot.
+  combine: Dice the ham and add it to the pot. Pour in the sauce and mix everything.
+  bake: Preheat the oven to 180 °C. Transfer the pasta to a large baking dish or several small ones. Sprinkle with the grated cheese and bake on the middle shelf until golden.

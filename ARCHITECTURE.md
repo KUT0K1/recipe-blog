@@ -228,3 +228,7 @@ These refine the spec above; they do not change its intent.
 - **Root page:** `/` forwards to `/de/` with a meta refresh and lists all locales; it is `noindex` and excluded from the sitemap.
 - **404:** one bilingual page, because GitHub Pages serves a single `404.html`.
 - **Placeholder images:** until real photos exist, `scripts/placeholder-image.mjs` generates neutral cover images so the "cover required" rule stays enforced.
+- **Ranges:** an ingredient line may set `amountMax` (> `amount`) for ranges such as "2–3 EL"; both ends are scaled, the upper bound decides unit normalisation and inflection.
+- **Counting units:** additionally `cup` (Becher, used as a measure), `cube` (yeast cube), `packet` (Päckchen) and `bunch` (Bund); all use the quarter-fraction display.
+- **Yield:** `servings` is optional. `yieldUnit` (`servings` default, `trays`, `loaf-pans`, `pieces`) names what is counted; labels live in the UI dictionary. Without `servings` amounts are shown as written and the serving control is hidden.
+- **Notes on "to taste" lines:** for lines without an amount the translation note replaces the generic "nach Geschmack" text (e.g. "Olivenöl – zum Andünsten").

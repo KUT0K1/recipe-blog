@@ -48,12 +48,21 @@ export const ingredientLineSchema = z
     /** Optional group, e.g. "crust" / "filling"; names live in translations. */
     group: idSchema.optional(),
     amount: z.number().positive().nullable(),
+    /** Upper bound for ranges such as "2–3 EL"; `amount` is the lower bound. */
+    amountMax: z.number().positive().optional(),
     unit: z.enum(unitIds).nullable(),
     scalable: z.boolean().optional(),
   })
   .refine((line) => (line.amount === null) === (line.unit === null), {
     message: "`unit` must be null exactly when `amount` is null",
-  });
+  })
+  .refine(
+    (line) =>
+      line.amountMax === undefined || (line.amount !== null && line.amountMax > line.amount),
+    {
+      message: "`amountMax` requires `amount` and must be greater than it",
+    },
+  );
 
 export const stepSchema = z.strictObject({
   id: idSchema,
@@ -62,9 +71,15 @@ export const stepSchema = z.strictObject({
   temperatureCelsius: z.number().int().positive().optional(),
 });
 
+/** What `servings` counts; labels live in the UI dictionary. */
+export const yieldUnits = ["servings", "trays", "loaf-pans", "pieces"] as const;
+export type YieldUnit = (typeof yieldUnits)[number];
+
 export const recipeSchema = z.strictObject({
   id: idSchema,
-  servings: z.number().int().positive(),
+  /** Optional: without it amounts are shown as written and cannot be scaled. */
+  servings: z.number().int().positive().optional(),
+  yieldUnit: z.enum(yieldUnits).default("servings"),
   category: idSchema,
   tags: z.array(idSchema).default([]),
   time: z

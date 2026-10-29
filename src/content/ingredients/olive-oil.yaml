@@ -1,0 +1,6 @@
+id: olive-oil
+category: basics
+names:
+  de: { singular: Olivenöl }
+  en: { singular: olive oil }
+defaultUnit: tbsp

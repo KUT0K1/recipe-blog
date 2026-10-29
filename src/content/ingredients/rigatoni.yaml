@@ -1,0 +1,6 @@
+id: rigatoni
+category: grains
+names:
+  de: { singular: Rigatoni }
+  en: { singular: rigatoni }
+defaultUnit: g

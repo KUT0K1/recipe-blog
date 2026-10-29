@@ -1,0 +1,6 @@
+id: oregano
+category: spices
+names:
+  de: { singular: Oregano }
+  en: { singular: oregano }
+defaultUnit: tsp

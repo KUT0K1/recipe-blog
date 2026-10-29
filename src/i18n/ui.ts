@@ -1,4 +1,7 @@
 import type { Locale } from "../config/locales";
+import type { YieldUnit } from "../lib/schemas";
+
+type Inflected = { one: string; other: string };
 
 const de = {
   siteName: "Rezept-Blog",
@@ -27,10 +30,14 @@ const de = {
     noResults: "Keine passenden Rezepte gefunden.",
   },
   recipe: {
-    servings: "Portionen",
-    servingsShort: (n: number) => `${n} ${n === 1 ? "Portion" : "Portionen"}`,
-    decreaseServings: "Eine Portion weniger",
-    increaseServings: "Eine Portion mehr",
+    yieldUnits: {
+      servings: { one: "Portion", other: "Portionen" },
+      trays: { one: "Blech", other: "Bleche" },
+      "loaf-pans": { one: "Kastenform", other: "Kastenformen" },
+      pieces: { one: "Stück", other: "Stück" },
+    } as Record<YieldUnit, Inflected>,
+    decreaseServings: "Menge verringern",
+    increaseServings: "Menge erhöhen",
     resetServings: "Zurücksetzen",
     ingredients: "Zutaten",
     ingredientCount: (n: number) => `${n} Zutaten`,
@@ -96,10 +103,14 @@ const en: UiStrings = {
     noResults: "No matching recipes found.",
   },
   recipe: {
-    servings: "Servings",
-    servingsShort: (n: number) => `${n} ${n === 1 ? "serving" : "servings"}`,
-    decreaseServings: "One serving less",
-    increaseServings: "One serving more",
+    yieldUnits: {
+      servings: { one: "serving", other: "servings" },
+      trays: { one: "baking tray", other: "baking trays" },
+      "loaf-pans": { one: "loaf tin", other: "loaf tins" },
+      pieces: { one: "piece", other: "pieces" },
+    },
+    decreaseServings: "Decrease amount",
+    increaseServings: "Increase amount",
     resetServings: "Reset",
     ingredients: "Ingredients",
     ingredientCount: (n: number) => `${n} ingredients`,
@@ -144,6 +155,12 @@ function formatDuration(minutes: number, hourLabel: string, minuteLabel: string)
 }
 
 export const ui: Record<Locale, UiStrings> = { de, en };
+
+/** "4 Portionen", "2 Bleche", "1 loaf tin". */
+export function yieldText(strings: UiStrings, count: number, unit: YieldUnit): string {
+  const labels = strings.recipe.yieldUnits[unit];
+  return `${count} ${count === 1 ? labels.one : labels.other}`;
+}
 
 export function t(locale: Locale): UiStrings {
   return ui[locale];

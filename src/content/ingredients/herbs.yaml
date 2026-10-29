@@ -1,0 +1,5 @@
+id: herbs
+category: spices
+names:
+  de: { singular: Kräuter }
+  en: { singular: herbs }

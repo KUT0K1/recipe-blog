@@ -1,0 +1,6 @@
+id: frozen-vegetables
+category: vegetables
+names:
+  de: { singular: TK-Gemüse }
+  en: { singular: frozen vegetables }
+defaultUnit: g

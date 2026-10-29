@@ -1,0 +1,23 @@
+locale: en
+slug: creamy-potato-and-mince-bake
+title: Creamy Potato and Mince Bake with Bacon
+description: Hearty bake of sliced potatoes, minced meat and bacon in a garlic cream sauce, topped with cheese.
+imageAlt:
+  cover.webp: Placeholder image for the potato and mince bake
+ingredientGroups:
+  base: Potatoes and mince filling
+  sauce: Sauce
+  topping: Topping
+ingredientNotes:
+  frozen-vegetables: optional, e.g. cauliflower and carrots
+  tomato-paste: optional
+  paprika: optional
+  marjoram: to taste, or thyme
+steps:
+  par-boil-potatoes: Peel the potatoes, slice them thinly and parboil in salted water for 5–7 minutes. They should still be quite firm.
+  brown-filling: Render the bacon in a pan, add the onion and fry briefly. Then brown the minced meat well and add the garlic at the end. Season with pepper, paprika and a little marjoram or thyme. If using frozen vegetables, fry them from frozen with the mince for 3–4 minutes now.
+  mix-sauce: Whisk the cream, milk and stock together and season well with pepper and nutmeg. Optionally fry 1 tsp tomato purée in the mince pan first – it makes the bake richer without tasting of tomato sauce.
+  layer-and-bake: Layer potatoes, then the mince filling, then potatoes again in a small baking dish. Pour over the sauce, sprinkle with the cheese and bake at 200 °C (conventional) for 20–25 minutes until the cheese is nicely browned.
+notes:
+  - Go easy on the salt – the bacon, stock and cheese are already salty.
+  - Instead of pouring the sauce over the bake, you can also stir it into the mince briefly.

@@ -1,0 +1,6 @@
+id: salami
+category: meat
+names:
+  de: { singular: Salami }
+  en: { singular: salami }
+defaultUnit: g

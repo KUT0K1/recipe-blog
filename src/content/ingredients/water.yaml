@@ -1,0 +1,6 @@
+id: water
+category: basics
+names:
+  de: { singular: Wasser }
+  en: { singular: water }
+defaultUnit: ml

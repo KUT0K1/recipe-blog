@@ -1,0 +1,6 @@
+id: sausages
+category: meat
+names:
+  de: { singular: Würstchen, plural: Würstchen }
+  en: { singular: frankfurter, plural: frankfurters }
+defaultUnit: piece

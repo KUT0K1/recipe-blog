@@ -1,0 +1,6 @@
+id: vegetable-stock
+category: basics
+names:
+  de: { singular: Gemüsebrühe }
+  en: { singular: vegetable stock }
+defaultUnit: ml

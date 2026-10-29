@@ -1,0 +1,25 @@
+id: schmand-cake
+servings: 1
+yieldUnit: loaf-pans
+category: baking
+tags: [cake, chocolate, vegetarian]
+time:
+  cookingMinutes: 60
+images:
+  cover: cover.webp
+ingredients:
+  - { id: sour-cream, amount: 250, unit: g }
+  - { id: flour, amount: 1, unit: cup }
+  - { id: sugar, amount: 1, unit: cup }
+  - { id: ground-hazelnuts, amount: 1, unit: cup }
+  - { id: chocolate-sprinkles, amount: 1, unit: cup }
+  - { id: sunflower-oil, amount: 0.25, amountMax: 0.5, unit: cup }
+  - { id: egg, amount: 3, unit: piece }
+  - { id: baking-powder, amount: 1, unit: packet }
+  - { id: vanilla-sugar, amount: 1, unit: packet }
+  - { id: cocoa-powder, amount: null, unit: null }
+steps:
+  - id: mix
+  - id: bake
+    durationMinutes: 60
+    temperatureCelsius: 160

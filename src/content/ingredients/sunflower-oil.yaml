@@ -1,0 +1,6 @@
+id: sunflower-oil
+category: basics
+names:
+  de: { singular: Sonnenblumenöl }
+  en: { singular: sunflower oil }
+defaultUnit: ml

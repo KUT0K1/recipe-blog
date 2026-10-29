@@ -1,7 +1,7 @@
 import { getImage } from "astro:assets";
 import type { RecipeCardData } from "../components/RecipeCard";
 import type { Locale } from "../config/locales";
-import { t } from "../i18n/ui";
+import { t, yieldText } from "../i18n/ui";
 import { ingredientCount, totalMinutes, type LocalizedRecipe } from "./recipes";
 
 const CARD_WIDTHS = [400, 640, 960];
@@ -9,7 +9,8 @@ const CARD_SIZES = "(min-width: 1024px) 320px, (min-width: 640px) 50vw, 100vw";
 
 /** Card data with build-time optimised image variants. */
 export async function toCardData(recipe: LocalizedRecipe, locale: Locale): Promise<RecipeCardData> {
-  const strings = t(locale).recipe;
+  const ui = t(locale);
+  const strings = ui.recipe;
   const optimized = await getImage({
     src: recipe.cover.image,
     widths: CARD_WIDTHS,
@@ -23,7 +24,7 @@ export async function toCardData(recipe: LocalizedRecipe, locale: Locale): Promi
     description: recipe.description,
     meta: [
       recipe.category.label,
-      strings.servingsShort(recipe.servings),
+      ...(recipe.servings ? [yieldText(ui, recipe.servings, recipe.yieldUnit)] : []),
       strings.ingredientCount(ingredientCount(recipe)),
       ...(minutes ? [strings.minutes(minutes)] : []),
     ],

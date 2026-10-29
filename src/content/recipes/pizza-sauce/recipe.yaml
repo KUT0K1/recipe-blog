@@ -1,0 +1,18 @@
+id: pizza-sauce
+category: sauces
+tags: [pizza, vegetarian, quick]
+images:
+  cover: cover.webp
+ingredients:
+  - { id: olive-oil, amount: null, unit: null }
+  - { id: onion, amount: 1, unit: piece }
+  - { id: strained-tomatoes, amount: 500, unit: ml }
+  - { id: tomato-paste, amount: 2, amountMax: 3, unit: tbsp }
+  - { id: sugar, amount: 0.5, unit: tsp }
+  - { id: salt, amount: null, unit: null }
+  - { id: pepper, amount: null, unit: null }
+  - { id: herbs, amount: null, unit: null }
+steps:
+  - id: saute-onion
+  - id: add-tomatoes
+  - id: reduce

@@ -1,3 +1,7 @@
 # Recipe categories. Keys are stable IDs referenced by recipe.yaml.
 main-dishes: { de: Hauptgerichte, en: Main dishes }
+soups: { de: Suppen, en: Soups }
+snacks: { de: Snacks, en: Snacks }
+baking: { de: Backen, en: Baking }
+sauces: { de: Saucen, en: Sauces }
 desserts: { de: Desserts, en: Desserts }

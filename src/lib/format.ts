@@ -48,30 +48,51 @@ function normalize(value: number, unit: UnitId): { value: number; unit: UnitId }
   return { value, unit };
 }
 
+function formatMetric(value: number, locale: Locale): string {
+  return new Intl.NumberFormat(
+    localeMeta[locale].intl,
+    value < 1 ? { maximumSignificantDigits: 2 } : { maximumFractionDigits: 2 },
+  ).format(value);
+}
+
+/** Joins a range, collapsing it when both ends render identically. */
+const range = (min: string, max: string | undefined) =>
+  max === undefined || max === min ? min : `${min}–${max}`;
+
+/**
+ * Formats an amount, or a range when `amountMax` is given ("2–3 EL").
+ * For ranges the upper bound decides unit normalisation and inflection.
+ */
 export function formatQuantity(
   amount: number | null,
   unit: UnitId | null,
   locale: Locale,
+  amountMax?: number | null,
 ): FormattedQuantity {
   if (amount === null || unit === null) return { amount: "", unit: "", nameForm: "withUnit" };
+  const max = amountMax ?? undefined;
 
   const def = units[unit];
   if (def.strategy === "fraction") {
-    const { text, rounded } = formatFraction(amount, locale);
-    const isOne = rounded <= 1;
+    const low = formatFraction(amount, locale);
+    const high = max === undefined ? undefined : formatFraction(max, locale);
+    const isOne = (high ?? low).rounded <= 1;
     const label = def.labels[locale][isOne ? "one" : "other"];
     // Only the bare count ("1 Ei", "2 Eier") inflects the ingredient name.
     const nameForm = unit === "piece" ? (isOne ? "singular" : "plural") : "withUnit";
-    return { amount: text, unit: label, nameForm };
+    return { amount: range(low.text, high?.text), unit: label, nameForm };
   }
 
-  const normalized = normalize(roundMetric(amount, unit), unit);
-  const value = roundMetric(normalized.value, normalized.unit);
-  const text = new Intl.NumberFormat(
-    localeMeta[locale].intl,
-    value < 1 ? { maximumSignificantDigits: 2 } : { maximumFractionDigits: 2 },
-  ).format(value);
-  return { amount: text, unit: units[normalized.unit].labels[locale].other, nameForm: "withUnit" };
+  const top = normalize(roundMetric(max ?? amount, unit), unit);
+  const factor = top.unit === unit ? 1 : (units[unit].normalizeTo?.factor ?? 1);
+  const low = formatMetric(roundMetric(roundMetric(amount, unit) / factor, top.unit), locale);
+  const high =
+    max === undefined ? undefined : formatMetric(roundMetric(top.value, top.unit), locale);
+  return {
+    amount: range(low, high),
+    unit: units[top.unit].labels[locale].other,
+    nameForm: "withUnit",
+  };
 }
 
 export interface IngredientNames {
@@ -82,21 +103,23 @@ export interface IngredientNames {
 
 export interface IngredientTextInput extends IngredientNames {
   amount: number | null;
+  amountMax?: number | null;
   unit: UnitId | null;
   note?: string;
 }
 
-/** Plain-text line, e.g. "200 g Kekse" or "Salz – nach Geschmack". */
+/**
+ * Plain-text line, e.g. "200 g Kekse (gehackt)" or "Salz – nach Geschmack".
+ * Without an amount the note replaces the "to taste" text ("Olivenöl – zum Andünsten").
+ */
 export function formatIngredientText(
   line: IngredientTextInput,
   locale: Locale,
   toTaste: string,
 ): string {
-  const q = formatQuantity(line.amount, line.unit, locale);
+  const q = formatQuantity(line.amount, line.unit, locale, line.amountMax);
   const name = line[q.nameForm];
-  const main =
-    line.amount === null
-      ? `${name} – ${toTaste}`
-      : [q.amount, q.unit, name].filter(Boolean).join(" ");
+  if (line.amount === null) return `${name} – ${line.note ?? toTaste}`;
+  const main = [q.amount, q.unit, name].filter(Boolean).join(" ");
   return line.note ? `${main} (${line.note})` : main;
 }

@@ -1,0 +1,29 @@
+id: spelt-pizza-dough
+servings: 2
+yieldUnit: trays
+category: baking
+tags: [pizza, yeast-dough, vegetarian]
+time:
+  restingMinutes: 90
+  cookingMinutes: 15
+images:
+  cover: cover.webp
+ingredients:
+  - { id: yeast, amount: 0.5, unit: cube }
+  - { id: sugar, amount: 0.5, unit: tsp }
+  - { id: salt, amount: 3, unit: tsp }
+  - { id: olive-oil, amount: 5, unit: tbsp }
+  - { id: spelt-flour, amount: 650, unit: g }
+  - { id: water, amount: 420, unit: ml }
+steps:
+  - id: activate-yeast
+    durationMinutes: 5
+  - id: knead
+    durationMinutes: 10
+  - id: bulk-rise
+    durationMinutes: 30
+  - id: divide-and-proof
+    durationMinutes: 60
+  - id: bake
+    durationMinutes: 15
+    temperatureCelsius: 220

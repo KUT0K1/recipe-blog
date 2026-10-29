@@ -4,7 +4,7 @@ import BaseLayout from "../../../layouts/BaseLayout.astro";
 import RecipeGallery from "../../../components/RecipeGallery.astro";
 import RecipeIngredients from "../../../components/RecipeIngredients";
 import { locales, type Locale } from "../../../config/locales";
-import { t } from "../../../i18n/ui";
+import { t, yieldText } from "../../../i18n/ui";
 import { getRecipes, totalMinutes, type LocalizedRecipe } from "../../../lib/recipes";
 import { recipeJsonLd } from "../../../lib/seo";
 import { absoluteUrl } from "../../../lib/urls";
@@ -37,6 +37,7 @@ const jsonLd = recipeJsonLd(recipe, {
   imageUrl: absoluteUrl(ogImage.src, Astro.site),
   toTaste: strings.recipe.toTaste,
   siteName: strings.siteName,
+  ...(recipe.servings ? { yield: yieldText(strings, recipe.servings, recipe.yieldUnit) } : {}),
 });
 const temperature = new Intl.NumberFormat(locale, { style: "unit", unit: "celsius" });
 ---
@@ -99,11 +100,11 @@ const temperature = new Intl.NumberFormat(locale, { style: "unit", unit: "celsiu
         <RecipeIngredients
           client:load
           locale={locale}
-          baseServings={recipe.servings}
+          {...(recipe.servings ? { baseServings: recipe.servings } : {})}
           groups={recipe.ingredientGroups}
           labels={{
             heading: strings.recipe.ingredients,
-            servings: strings.recipe.servings,
+            yieldUnit: strings.recipe.yieldUnits[recipe.yieldUnit],
             decrease: strings.recipe.decreaseServings,
             increase: strings.recipe.increaseServings,
             reset: strings.recipe.resetServings,

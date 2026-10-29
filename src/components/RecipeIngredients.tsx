@@ -6,7 +6,8 @@ import { MIN_SERVINGS, isValidServings, maxServingsFor, scaleAmount } from "../l
 
 export interface RecipeIngredientsLabels {
   heading: string;
-  servings: string;
+  /** What the serving control counts, e.g. Portion/Portionen or Blech/Bleche. */
+  yieldUnit: { one: string; other: string };
   decrease: string;
   increase: string;
   reset: string;
@@ -19,21 +20,27 @@ export interface RecipeIngredientsLabels {
 
 interface Props {
   locale: Locale;
-  baseServings: number;
+  /** Without a base yield the amounts are shown as written, without scaling. */
+  baseServings?: number;
   groups: IngredientGroupView[];
   labels: RecipeIngredientsLabels;
 }
 
 type CopyState = "idle" | "copied" | "failed";
 
+const capitalize = (text: string) => text.charAt(0).toLocaleUpperCase() + text.slice(1);
+
 export default function RecipeIngredients({ locale, baseServings, groups, labels }: Props) {
-  const [servings, setServings] = useState(baseServings);
-  const [draft, setDraft] = useState(String(baseServings));
+  const canScale = baseServings !== undefined;
+  const base = baseServings ?? 1;
+  const [servings, setServings] = useState(base);
+  const [draft, setDraft] = useState(String(base));
   const [checked, setChecked] = useState<ReadonlySet<string>>(new Set());
   const [copyState, setCopyState] = useState<CopyState>("idle");
   const inputId = useId();
   const hintId = useId();
-  const max = maxServingsFor(baseServings);
+  const max = maxServingsFor(base);
+  const yieldLabel = servings === 1 ? labels.yieldUnit.one : labels.yieldUnit.other;
 
   const update = (value: number) => {
     const next = Math.min(max, Math.max(MIN_SERVINGS, Math.round(value)));
@@ -45,7 +52,11 @@ export default function RecipeIngredients({ locale, baseServings, groups, labels
     ...group,
     lines: group.lines.map((line) => ({
       ...line,
-      amount: scaleAmount(line, baseServings, servings),
+      amount: scaleAmount(line, base, servings),
+      amountMax:
+        line.amountMax === undefined
+          ? undefined
+          : scaleAmount({ amount: line.amountMax, scalable: line.scalable }, base, servings),
     })),
   }));
 
@@ -67,7 +78,7 @@ export default function RecipeIngredients({ locale, baseServings, groups, labels
       .join("\n\n");
     try {
       await navigator.clipboard.writeText(
-        `${labels.heading} (${servings} ${labels.servings})\n\n${text}`,
+        `${canScale ? `${labels.heading} (${servings} ${yieldLabel})` : labels.heading}\n\n${text}`,
       );
       setCopyState("copied");
     } catch {
@@ -88,58 +99,60 @@ export default function RecipeIngredients({ locale, baseServings, groups, labels
         {labels.heading}
       </h2>
 
-      <div className="mb-5 flex flex-wrap items-center gap-2">
-        <label htmlFor={inputId} className="mr-1 font-medium">
-          {labels.servings}
-        </label>
-        <button
-          type="button"
-          className={buttonClass}
-          onClick={() => update(servings - 1)}
-          disabled={servings <= MIN_SERVINGS}
-          aria-label={labels.decrease}
-          aria-controls={`${inputId}-list`}
-        >
-          −
-        </button>
-        <input
-          id={inputId}
-          type="number"
-          inputMode="numeric"
-          min={MIN_SERVINGS}
-          max={max}
-          step={1}
-          value={draft}
-          onChange={(event) => {
-            setDraft(event.target.value);
-            const value = Number(event.target.value);
-            if (isValidServings(value, max)) setServings(value);
-          }}
-          onBlur={() => setDraft(String(servings))}
-          aria-controls={`${inputId}-list`}
-          className="h-10 w-16 rounded-md border border-line-strong text-center text-lg font-semibold"
-          data-testid="servings-input"
-        />
-        <button
-          type="button"
-          className={buttonClass}
-          onClick={() => update(servings + 1)}
-          disabled={servings >= max}
-          aria-label={labels.increase}
-          aria-controls={`${inputId}-list`}
-        >
-          +
-        </button>
-        {servings !== baseServings && (
+      {canScale && (
+        <div className="mb-5 flex flex-wrap items-center gap-2">
+          <label htmlFor={inputId} className="mr-1 font-medium">
+            {capitalize(labels.yieldUnit.other)}
+          </label>
           <button
             type="button"
-            className="ml-1 text-sm text-brand underline"
-            onClick={() => update(baseServings)}
+            className={buttonClass}
+            onClick={() => update(servings - 1)}
+            disabled={servings <= MIN_SERVINGS}
+            aria-label={labels.decrease}
+            aria-controls={`${inputId}-list`}
           >
-            {labels.reset}
+            −
           </button>
-        )}
-      </div>
+          <input
+            id={inputId}
+            type="number"
+            inputMode="numeric"
+            min={MIN_SERVINGS}
+            max={max}
+            step={1}
+            value={draft}
+            onChange={(event) => {
+              setDraft(event.target.value);
+              const value = Number(event.target.value);
+              if (isValidServings(value, max)) setServings(value);
+            }}
+            onBlur={() => setDraft(String(servings))}
+            aria-controls={`${inputId}-list`}
+            className="h-10 w-16 rounded-md border border-line-strong text-center text-lg font-semibold"
+            data-testid="servings-input"
+          />
+          <button
+            type="button"
+            className={buttonClass}
+            onClick={() => update(servings + 1)}
+            disabled={servings >= max}
+            aria-label={labels.increase}
+            aria-controls={`${inputId}-list`}
+          >
+            +
+          </button>
+          {servings !== base && (
+            <button
+              type="button"
+              className="ml-1 text-sm text-brand underline"
+              onClick={() => update(base)}
+            >
+              {labels.reset}
+            </button>
+          )}
+        </div>
+      )}
 
       <p id={hintId} className="mb-3 text-sm text-fg-muted">
         {labels.checklistHint}
@@ -155,7 +168,7 @@ export default function RecipeIngredients({ locale, baseServings, groups, labels
             )}
             <ul className="space-y-1" aria-describedby={hintId}>
               {group.lines.map((line) => {
-                const q = formatQuantity(line.amount, line.unit, locale);
+                const q = formatQuantity(line.amount, line.unit, locale, line.amountMax);
                 const name = line[q.nameForm];
                 const boxId = `${inputId}-${line.key}`;
                 const isChecked = checked.has(line.key);
@@ -175,7 +188,8 @@ export default function RecipeIngredients({ locale, baseServings, groups, labels
                       <span className={isChecked ? "text-fg-faint line-through" : undefined}>
                         {line.amount === null ? (
                           <>
-                            {name} <span className="text-fg-muted">– {labels.toTaste}</span>
+                            {name}{" "}
+                            <span className="text-fg-muted">– {line.note ?? labels.toTaste}</span>
                           </>
                         ) : (
                           <>
@@ -188,7 +202,9 @@ export default function RecipeIngredients({ locale, baseServings, groups, labels
                             {name}
                           </>
                         )}
-                        {line.note && <span className="text-fg-muted"> ({line.note})</span>}
+                        {line.amount !== null && line.note && (
+                          <span className="text-fg-muted"> ({line.note})</span>
+                        )}
                       </span>
                     </label>
                   </li>

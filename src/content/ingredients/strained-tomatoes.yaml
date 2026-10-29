@@ -1,0 +1,6 @@
+id: strained-tomatoes
+category: vegetables
+names:
+  de: { singular: passierte Tomaten }
+  en: { singular: passata }
+defaultUnit: ml

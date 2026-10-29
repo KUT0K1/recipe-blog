@@ -1,0 +1,6 @@
+id: vanilla-sugar
+category: baking
+names:
+  de: { singular: Vanillinzucker }
+  en: { singular: vanilla sugar }
+defaultUnit: packet

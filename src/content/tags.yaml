@@ -1,6 +1,14 @@
 # Recipe tags. Keys are stable IDs referenced by recipe.yaml.
+bread: { de: Brot, en: Bread }
 cake: { de: Kuchen, en: Cake }
+casserole: { de: Auflauf, en: Casserole }
 chicken: { de: Hähnchen, en: Chicken }
+chocolate: { de: Schokolade, en: Chocolate }
+minced-meat: { de: Hackfleisch, en: Minced meat }
 no-bake: { de: Ohne Backen, en: No-bake }
 pasta: { de: Pasta, en: Pasta }
+pizza: { de: Pizza, en: Pizza }
+potato: { de: Kartoffeln, en: Potatoes }
 quick: { de: Schnell, en: Quick }
+vegetarian: { de: Vegetarisch, en: Vegetarian }
+yeast-dough: { de: Hefeteig, en: Yeast dough }

@@ -1,0 +1,6 @@
+id: bake-off-rolls
+category: baking
+names:
+  de: { singular: Aufbackbrötchen, plural: Aufbackbrötchen }
+  en: { singular: part-baked roll, plural: part-baked rolls }
+defaultUnit: piece

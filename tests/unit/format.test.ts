@@ -54,6 +54,43 @@ describe("formatQuantity – fractions", () => {
   });
 });
 
+describe("formatQuantity – ranges", () => {
+  it("formats metric ranges", () => {
+    expect(formatQuantity(200, "g", "de", 250)).toMatchObject({ amount: "200–250", unit: "g" });
+  });
+
+  it("normalises both ends based on the upper bound", () => {
+    expect(formatQuantity(800, "g", "de", 1200)).toMatchObject({ amount: "0,8–1,2", unit: "kg" });
+  });
+
+  it("formats fraction ranges and inflects by the upper bound", () => {
+    expect(formatQuantity(0.25, "cup", "de", 0.5)).toMatchObject({ amount: "¼–½", unit: "Becher" });
+    expect(formatQuantity(0.5, "piece", "de", 1)).toMatchObject({
+      amount: "½–1",
+      nameForm: "singular",
+    });
+    expect(formatQuantity(6, "piece", "en", 8)).toMatchObject({
+      amount: "6–8",
+      nameForm: "plural",
+    });
+    expect(formatQuantity(2, "tbsp", "en", 3)).toMatchObject({ amount: "2–3", unit: "tbsp" });
+  });
+
+  it("collapses ranges whose ends round to the same value", () => {
+    expect(formatQuantity(1, "clove", "en", 1.1).amount).toBe("1");
+  });
+});
+
+describe("formatQuantity – counting units", () => {
+  it("labels cups, cubes, packets and bunches", () => {
+    expect(formatQuantity(1, "cube", "de")).toMatchObject({ amount: "1", unit: "Würfel" });
+    expect(formatQuantity(0.5, "cube", "en")).toMatchObject({ amount: "½", unit: "cube" });
+    expect(formatQuantity(2, "packet", "en")).toMatchObject({ unit: "packets" });
+    expect(formatQuantity(1, "bunch", "de")).toMatchObject({ unit: "Bund" });
+    expect(formatQuantity(1.5, "cup", "en")).toMatchObject({ amount: "1½", unit: "cups" });
+  });
+});
+
 describe("formatQuantity – to taste", () => {
   it("returns empty amount without arithmetic", () => {
     expect(formatQuantity(null, null, "de")).toEqual({
@@ -81,7 +118,10 @@ describe("formatIngredientText", () => {
         "de",
         "nach Geschmack",
       ),
-    ).toBe("Salz – nach Geschmack (für das Nudelwasser)");
+    ).toBe("Salz – für das Nudelwasser");
+    expect(
+      formatIngredientText({ ...salt, amount: null, unit: null }, "de", "nach Geschmack"),
+    ).toBe("Salz – nach Geschmack");
     expect(
       formatIngredientText(
         {
@@ -95,5 +135,12 @@ describe("formatIngredientText", () => {
         "nach Geschmack",
       ),
     ).toBe("200 g Hähnchenbrust");
+    expect(
+      formatIngredientText(
+        { ...egg, amount: 2, amountMax: 3, unit: "piece" },
+        "de",
+        "nach Geschmack",
+      ),
+    ).toBe("2–3 Eier");
   });
 });

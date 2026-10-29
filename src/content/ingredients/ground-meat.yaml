@@ -1,0 +1,6 @@
+id: ground-meat
+category: meat
+names:
+  de: { singular: Hackfleisch }
+  en: { singular: minced meat }
+defaultUnit: g

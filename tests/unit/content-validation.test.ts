@@ -259,8 +259,33 @@ describe("schemas", () => {
     ).toBe(false);
   });
 
+  it("validates ranges", () => {
+    const line = { id: "salt", unit: "g" };
+    expect(ingredientLineSchema.safeParse({ ...line, amount: 2, amountMax: 3 }).success).toBe(true);
+    expect(ingredientLineSchema.safeParse({ ...line, amount: 3, amountMax: 2 }).success).toBe(
+      false,
+    );
+    expect(ingredientLineSchema.safeParse({ ...line, amount: 3, amountMax: 3 }).success).toBe(
+      false,
+    );
+    expect(
+      ingredientLineSchema.safeParse({ id: "salt", amount: null, unit: null, amountMax: 2 })
+        .success,
+    ).toBe(false);
+  });
+
+  it("makes servings optional and defaults the yield unit", () => {
+    const rest: Record<string, unknown> = { ...recipe() };
+    delete rest.servings;
+    delete rest.yieldUnit;
+    const parsed = recipeSchema.parse(rest);
+    expect(parsed.servings).toBeUndefined();
+    expect(parsed.yieldUnit).toBe("servings");
+    expect(recipeSchema.safeParse({ ...rest, yieldUnit: "buckets" }).success).toBe(false);
+  });
+
   it("rejects unknown units and non-kebab IDs", () => {
-    expect(ingredientLineSchema.safeParse({ id: "salt", amount: 1, unit: "cup" }).success).toBe(
+    expect(ingredientLineSchema.safeParse({ id: "salt", amount: 1, unit: "gallon" }).success).toBe(
       false,
     );
     expect(ingredientLineSchema.safeParse({ id: "Salz", amount: 1, unit: "g" }).success).toBe(

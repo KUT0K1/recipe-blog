@@ -7,7 +7,13 @@ const isoDuration = (minutes: number) => `PT${minutes}M`;
 /** schema.org Recipe JSON-LD. No ratings or nutrition: we have no such data. */
 export function recipeJsonLd(
   recipe: LocalizedRecipe,
-  options: { url: string; imageUrl: string; toTaste: string; siteName: string },
+  options: {
+    url: string;
+    imageUrl: string;
+    toTaste: string;
+    siteName: string;
+    yield?: string;
+  },
 ) {
   const { time } = recipe;
   const total = totalMinutes(time);
@@ -20,7 +26,7 @@ export function recipeJsonLd(
     image: [options.imageUrl],
     inLanguage: localeMeta[recipe.locale].intl,
     author: { "@type": "Organization", name: options.siteName },
-    recipeYield: String(recipe.servings),
+    ...(options.yield ? { recipeYield: options.yield } : {}),
     recipeCategory: recipe.category.label,
     keywords: recipe.tags.map((tag) => tag.label).join(", "),
     ...(time.preparationMinutes ? { prepTime: isoDuration(time.preparationMinutes) } : {}),

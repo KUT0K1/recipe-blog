@@ -1,0 +1,6 @@
+id: grated-cheese
+category: dairy
+names:
+  de: { singular: Reibekäse }
+  en: { singular: grated cheese }
+defaultUnit: g

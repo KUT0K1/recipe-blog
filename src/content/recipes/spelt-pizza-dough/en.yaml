@@ -1,0 +1,17 @@
+locale: en
+slug: spelt-pizza
+title: Spelt Pizza
+description: Spelt flour pizza dough with olive oil – basic recipe for two baking trays.
+imageAlt:
+  cover.webp: Placeholder image for the spelt pizza
+ingredientNotes:
+  yeast: or 1 packet of dried yeast
+  water: lukewarm
+steps:
+  activate-yeast: Stir the water, yeast and sugar together and leave for about 5 minutes.
+  knead: Put the flour, salt and yeast water in a bowl and mix. Then add the olive oil and knead with a dough hook for at least 10 minutes (20 minutes by hand).
+  bulk-rise: Cover the dough and leave it to rise at room temperature for at least 30 minutes (bulk fermentation).
+  divide-and-proof: Divide the dough into one portion per baking tray and leave to rise for at least another hour (final proof).
+  bake: Roll out, add toppings of your choice and bake at 220 °C (fan) for about 10–15 minutes.
+notes:
+  - "Original amounts for 3 trays: 1 cube of yeast (or 2 packets of dried yeast), 1 tsp sugar, 5 tsp salt, 7 tbsp olive oil, 1 kg spelt flour, 640 ml water."

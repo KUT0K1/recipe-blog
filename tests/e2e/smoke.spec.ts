@@ -16,9 +16,9 @@ test("changing servings from 4 to 8 doubles scalable amounts only", async ({ pag
   await expect(page.getByTestId("amount-pasta")).toHaveText("800 g");
   await expect(page.getByTestId("amount-cream")).toHaveText("400 ml");
   await expect(page.getByTestId("amount-garlic")).toHaveText("2 Zehen");
-  await expect(page.getByText("– nach Geschmack")).toBeVisible();
+  await expect(page.getByText("– für das Nudelwasser")).toBeVisible();
 
-  await page.getByRole("button", { name: "Eine Portion weniger" }).click();
+  await page.getByRole("button", { name: "Menge verringern" }).click();
   await expect(servings).toHaveValue("7");
   await expect(page.getByTestId("amount-pasta")).toHaveText("700 g");
 });
@@ -46,12 +46,15 @@ test("language switch keeps the recipe and sets hreflang links", async ({ page }
 
 test("recipe search filters by ingredient name", async ({ page }) => {
   await page.goto("de/recipes/");
-  await expect(page.getByRole("article")).toHaveCount(2);
+  const total = await page.getByRole("article").count();
+  expect(total).toBeGreaterThan(2);
   await page.getByLabel("Rezepte durchsuchen").fill("mascarpone");
   await expect(page.getByRole("article")).toHaveCount(1);
   await expect(page.getByRole("article")).toContainText("Biscoff");
   await page.getByLabel("Rezepte durchsuchen").fill("hahnchen");
   await expect(page.getByRole("article")).toContainText("Hähnchen");
+  await page.getByLabel("Rezepte durchsuchen").fill("");
+  await expect(page.getByRole("article")).toHaveCount(total);
 });
 
 test("recipe page has valid JSON-LD", async ({ page }) => {
@@ -69,4 +72,22 @@ test("page has no horizontal overflow", async ({ page }) => {
     () => document.documentElement.scrollWidth > document.documentElement.clientWidth,
   );
   expect(overflow).toBe(false);
+});
+
+test("other yield units scale and ranges are shown", async ({ page }) => {
+  await page.goto("de/recipes/dinkelpizza/");
+  await expect(page.getByText("Bleche", { exact: true })).toBeVisible();
+  await expect(page.getByTestId("amount-spelt-flour")).toHaveText("650 g");
+  await page.getByRole("button", { name: "Menge erhöhen" }).click();
+  await expect(page.getByTestId("amount-spelt-flour")).toHaveText("975 g");
+  await expect(page.getByTestId("amount-yeast")).toHaveText("¾ Würfel");
+
+  await page.goto("de/recipes/kartoffelsuppe/");
+  await expect(page.getByTestId("amount-sausages")).toHaveText("6–8");
+});
+
+test("recipes without a yield show amounts but no serving control", async ({ page }) => {
+  await page.goto("de/recipes/pizzasosse/");
+  await expect(page.getByTestId("servings-input")).toHaveCount(0);
+  await expect(page.getByTestId("amount-tomato-paste")).toHaveText("2–3 EL");
 });

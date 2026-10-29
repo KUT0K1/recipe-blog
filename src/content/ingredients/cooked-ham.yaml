@@ -1,0 +1,6 @@
+id: cooked-ham
+category: meat
+names:
+  de: { singular: Kochschinken }
+  en: { singular: cooked ham }
+defaultUnit: g

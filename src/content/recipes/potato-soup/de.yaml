@@ -1,0 +1,17 @@
+locale: de
+slug: kartoffelsuppe
+title: Kartoffelsuppe
+description: Fein pürierte Kartoffelsuppe mit Suppengemüse und Würstchen – reicht für 6–8 Portionen.
+imageAlt:
+  cover.webp: Platzhalterbild für die Kartoffelsuppe
+ingredientNotes:
+  potato: mehligkochend (mit festkochenden verlängert sich die Kochzeit um ca. 10–15 Minuten)
+  sausages: alternativ Fleischwurst
+steps:
+  prepare-vegetables: Kartoffeln waschen, schälen und grob würfeln. Suppengemüse waschen, putzen und klein würfeln.
+  simmer: Kartoffeln, Suppengemüse und Gemüsebrühe in einen Topf geben, aufkochen und alles zugedeckt 20–25 Minuten kochen.
+  blend: Die Milch in den Topf geben und die Suppe fein pürieren. Noch einmal erwärmen und mit Salz und Pfeffer abschmecken.
+  serve: Die Würstchen in schmale Ringe schneiden und auf die Suppe geben.
+notes:
+  - "Speed-Tipp: Statt frischem Suppengemüse 400 g TK-Suppengemüse verwenden."
+  - "Vorratstipp: Die Suppe lässt sich (ohne Würstchen) prima einfrieren."
