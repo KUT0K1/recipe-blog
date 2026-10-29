@@ -77,12 +77,12 @@ export default function RecipeIngredients({ locale, baseServings, groups, labels
   };
 
   const buttonClass =
-    "inline-flex h-10 min-w-10 items-center justify-center rounded-md border border-stone-300 bg-white px-3 font-semibold text-stone-800 hover:bg-stone-100 disabled:cursor-not-allowed disabled:opacity-40";
+    "inline-flex h-10 min-w-10 items-center justify-center rounded-md border border-line-strong bg-surface px-3 font-semibold text-fg hover:bg-surface-hover disabled:cursor-not-allowed disabled:opacity-40";
 
   return (
     <section
       aria-labelledby={`${inputId}-heading`}
-      className="rounded-xl bg-white p-5 shadow-sm ring-1 ring-stone-200"
+      className="rounded-xl bg-surface p-5 shadow-sm ring-1 ring-line"
     >
       <h2 id={`${inputId}-heading`} className="mb-4 text-2xl font-bold">
         {labels.heading}
@@ -117,7 +117,7 @@ export default function RecipeIngredients({ locale, baseServings, groups, labels
           }}
           onBlur={() => setDraft(String(servings))}
           aria-controls={`${inputId}-list`}
-          className="h-10 w-16 rounded-md border border-stone-300 text-center text-lg font-semibold"
+          className="h-10 w-16 rounded-md border border-line-strong text-center text-lg font-semibold"
           data-testid="servings-input"
         />
         <button
@@ -133,7 +133,7 @@ export default function RecipeIngredients({ locale, baseServings, groups, labels
         {servings !== baseServings && (
           <button
             type="button"
-            className="ml-1 text-sm text-brand-700 underline"
+            className="ml-1 text-sm text-brand underline"
             onClick={() => update(baseServings)}
           >
             {labels.reset}
@@ -141,7 +141,7 @@ export default function RecipeIngredients({ locale, baseServings, groups, labels
         )}
       </div>
 
-      <p id={hintId} className="mb-3 text-sm text-stone-600">
+      <p id={hintId} className="mb-3 text-sm text-fg-muted">
         {labels.checklistHint}
       </p>
 
@@ -149,7 +149,7 @@ export default function RecipeIngredients({ locale, baseServings, groups, labels
         {scaled.map((group) => (
           <div key={group.id ?? "_"} className="mb-4 last:mb-0">
             {group.label && (
-              <h3 className="mb-2 font-sans text-sm font-bold tracking-wide text-stone-600 uppercase">
+              <h3 className="mb-2 font-sans text-sm font-bold tracking-wide text-fg-muted uppercase">
                 {group.label}
               </h3>
             )}
@@ -163,19 +163,19 @@ export default function RecipeIngredients({ locale, baseServings, groups, labels
                   <li key={line.key}>
                     <label
                       htmlFor={boxId}
-                      className="flex cursor-pointer items-start gap-3 rounded-md px-2 py-1.5 hover:bg-stone-50"
+                      className="flex cursor-pointer items-start gap-3 rounded-md px-2 py-1.5 hover:bg-page"
                     >
                       <input
                         id={boxId}
                         type="checkbox"
                         checked={isChecked}
                         onChange={() => toggle(line.key)}
-                        className="mt-1 size-4 shrink-0 accent-brand-600"
+                        className="mt-1 size-4 shrink-0 accent-brand-solid"
                       />
-                      <span className={isChecked ? "text-stone-400 line-through" : undefined}>
+                      <span className={isChecked ? "text-fg-faint line-through" : undefined}>
                         {line.amount === null ? (
                           <>
-                            {name} <span className="text-stone-600">– {labels.toTaste}</span>
+                            {name} <span className="text-fg-muted">– {labels.toTaste}</span>
                           </>
                         ) : (
                           <>
@@ -188,7 +188,7 @@ export default function RecipeIngredients({ locale, baseServings, groups, labels
                             {name}
                           </>
                         )}
-                        {line.note && <span className="text-stone-600"> ({line.note})</span>}
+                        {line.note && <span className="text-fg-muted"> ({line.note})</span>}
                       </span>
                     </label>
                   </li>
@@ -203,7 +203,7 @@ export default function RecipeIngredients({ locale, baseServings, groups, labels
         <button type="button" className={buttonClass} onClick={copy}>
           {labels.copy}
         </button>
-        <span role="status" className="text-sm text-stone-600">
+        <span role="status" className="text-sm text-fg-muted">
           {copyState === "copied" ? labels.copied : copyState === "failed" ? labels.copyFailed : ""}
         </span>
       </div>

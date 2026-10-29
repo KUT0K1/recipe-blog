@@ -52,7 +52,7 @@ const alternates = Object.fromEntries(locales.map((l) => [l, paths.recipes(l)]))
 >
   <h1 class="mb-6 text-4xl font-bold">{strings.recipes.title}</h1>
   {recipes.length === 0 ? (
-    <p class="py-8 text-center text-stone-600">{strings.recipes.empty}</p>
+    <p class="py-8 text-center text-fg-muted">{strings.recipes.empty}</p>
   ) : (
     <RecipeSearch
       client:load
