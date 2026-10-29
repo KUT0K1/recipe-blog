@@ -1,0 +1,21 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import { locales, type Locale } from "../../config/locales";
+import { t } from "../../i18n/ui";
+import { paths } from "../../lib/urls";
+
+export function getStaticPaths() {
+  return locales.map((lang) => ({ params: { lang } }));
+}
+
+const locale = Astro.params.lang as Locale;
+const strings = t(locale);
+const alternates = Object.fromEntries(locales.map((l) => [l, paths.about(l)]));
+---
+
+<BaseLayout locale={locale} title={strings.about.title} alternates={alternates}>
+  <article class="max-w-2xl">
+    <h1 class="mb-4 text-4xl font-bold">{strings.about.heading}</h1>
+    <p class="text-lg text-stone-700">{strings.about.body}</p>
+  </article>
+</BaseLayout>

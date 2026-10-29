@@ -1,0 +1,6 @@
+id: chicken-breast
+category: meat
+names:
+  de: { singular: Hähnchenbrust, plural: Hähnchenbrüste, withUnit: Hähnchenbrust }
+  en: { singular: chicken breast, plural: chicken breasts, withUnit: chicken breast }
+defaultUnit: g

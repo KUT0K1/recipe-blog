@@ -1,0 +1,6 @@
+id: butter
+category: dairy
+names:
+  de: { singular: Butter }
+  en: { singular: butter }
+defaultUnit: g

@@ -1,0 +1,17 @@
+locale: de
+slug: biscoff-no-bake-cheesecake
+title: Biscoff No-Bake Cheesecake
+description: Cremiger Käsekuchen ohne Backen mit Keksboden und Biscoff-Creme.
+imageAlt:
+  cover.webp: Platzhalterbild für den Biscoff No-Bake Cheesecake
+ingredientGroups:
+  crust: Boden
+  filling: Creme
+ingredientNotes:
+  butter: geschmolzen
+steps:
+  crumble-biscuits: Kekse fein zerkrümeln und mit geschmolzener Butter vermischen.
+  press-crust: In eine Springform drücken und kalt stellen.
+  mix-filling: Mascarpone, Quark und Biscoff-Creme glatt rühren.
+  whip-cream: Sahne steif schlagen und unterheben.
+  assemble-and-chill: Creme auf den Boden geben und mindestens 4 Stunden kühlen.

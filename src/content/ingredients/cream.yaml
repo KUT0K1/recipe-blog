@@ -1,0 +1,6 @@
+id: cream
+category: dairy
+names:
+  de: { singular: Sahne }
+  en: { singular: double cream }
+defaultUnit: ml

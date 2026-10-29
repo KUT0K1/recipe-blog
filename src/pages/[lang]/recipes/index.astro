@@ -1,0 +1,77 @@
+---
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import RecipeSearch, { type SearchIndexEntry } from "../../../components/RecipeSearch";
+import { locales, type Locale } from "../../../config/locales";
+import { t } from "../../../i18n/ui";
+import { toCardData } from "../../../lib/cards";
+import { getRecipes } from "../../../lib/recipes";
+import { buildSearchText } from "../../../lib/search";
+import { paths } from "../../../lib/urls";
+
+export function getStaticPaths() {
+  return locales.map((lang) => ({ params: { lang } }));
+}
+
+const locale = Astro.params.lang as Locale;
+const strings = t(locale);
+const recipes = await getRecipes(locale);
+
+// Small static index: only recipes published in this locale.
+const entries: SearchIndexEntry[] = await Promise.all(
+  recipes.map(async (recipe) => ({
+    id: recipe.id,
+    category: recipe.category.id,
+    tags: recipe.tags.map((tag) => tag.id),
+    searchText: buildSearchText({
+      title: recipe.title,
+      description: recipe.description,
+      category: recipe.category.label,
+      tags: recipe.tags.map((tag) => tag.label),
+      ingredients: recipe.ingredientGroups.flatMap((g) =>
+        g.lines.flatMap((line) => [line.singular, line.plural, line.withUnit]),
+      ),
+    }),
+    card: await toCardData(recipe, locale),
+  })),
+);
+
+const unique = <T extends { id: string }>(items: T[]) =>
+  [...new Map(items.map((item) => [item.id, item])).values()].sort((a, b) =>
+    "label" in a && "label" in b ? String(a.label).localeCompare(String(b.label), locale) : 0,
+  );
+const categories = unique(recipes.map((r) => r.category));
+const tags = unique(recipes.flatMap((r) => r.tags));
+const alternates = Object.fromEntries(locales.map((l) => [l, paths.recipes(l)]));
+---
+
+<BaseLayout
+  locale={locale}
+  title={strings.recipes.title}
+  description={strings.recipes.description}
+  alternates={alternates}
+>
+  <h1 class="mb-6 text-4xl font-bold">{strings.recipes.title}</h1>
+  {recipes.length === 0 ? (
+    <p class="py-8 text-center text-stone-600">{strings.recipes.empty}</p>
+  ) : (
+    <RecipeSearch
+      client:load
+      entries={entries}
+      categories={categories}
+      tags={tags}
+      labels={{
+        search: strings.recipes.searchLabel,
+        placeholder: strings.recipes.searchPlaceholder,
+        category: strings.recipes.categoryLabel,
+        allCategories: strings.recipes.allCategories,
+        tags: strings.recipes.tagsLabel,
+        reset: strings.recipes.resetFilters,
+        noResults: strings.recipes.noResults,
+        resultCount: [
+          strings.recipes.resultCount(1),
+          strings.recipes.resultCount(0).replace("0", "{n}"),
+        ],
+      }}
+    />
+  )}
+</BaseLayout>

@@ -1,5 +1,7 @@
 node_modules/
 dist/
-docs/
+.astro/
 .env
-.astro/types
+.env.*
+test-results/
+playwright-report/

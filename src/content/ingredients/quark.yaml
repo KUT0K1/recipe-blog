@@ -1,0 +1,6 @@
+id: quark
+category: dairy
+names:
+  de: { singular: Quark }
+  en: { singular: quark }
+defaultUnit: g

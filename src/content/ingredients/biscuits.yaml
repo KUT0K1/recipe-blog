@@ -1,0 +1,6 @@
+id: biscuits
+category: baking
+names:
+  de: { singular: Keks, plural: Kekse }
+  en: { singular: biscuit, plural: biscuits }
+defaultUnit: g

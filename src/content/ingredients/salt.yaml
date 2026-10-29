@@ -1,0 +1,5 @@
+id: salt
+category: spices
+names:
+  de: { singular: Salz }
+  en: { singular: salt }

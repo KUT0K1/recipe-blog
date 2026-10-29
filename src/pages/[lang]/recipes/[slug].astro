@@ -1,0 +1,190 @@
+---
+import { Picture, getImage } from "astro:assets";
+import BaseLayout from "../../../layouts/BaseLayout.astro";
+import RecipeGallery from "../../../components/RecipeGallery.astro";
+import RecipeIngredients from "../../../components/RecipeIngredients";
+import { locales, type Locale } from "../../../config/locales";
+import { t } from "../../../i18n/ui";
+import { getRecipes, totalMinutes, type LocalizedRecipe } from "../../../lib/recipes";
+import { recipeJsonLd } from "../../../lib/seo";
+import { absoluteUrl } from "../../../lib/urls";
+
+export async function getStaticPaths() {
+  const perLocale = await Promise.all(locales.map((locale) => getRecipes(locale)));
+  return perLocale.flat().map((recipe) => ({
+    params: { lang: recipe.locale, slug: recipe.slug },
+    props: { recipe },
+  }));
+}
+
+interface Props {
+  recipe: LocalizedRecipe;
+}
+
+const { recipe } = Astro.props;
+const locale: Locale = recipe.locale;
+const strings = t(locale);
+const total = totalMinutes(recipe.time);
+const times = [
+  { label: strings.recipe.time.preparation, minutes: recipe.time.preparationMinutes },
+  { label: strings.recipe.time.cooking, minutes: recipe.time.cookingMinutes },
+  { label: strings.recipe.time.resting, minutes: recipe.time.restingMinutes },
+].filter((entry): entry is { label: string; minutes: number } => !!entry.minutes);
+
+const ogImage = await getImage({ src: recipe.cover.image, width: 1200, format: "jpg" });
+const jsonLd = recipeJsonLd(recipe, {
+  url: absoluteUrl(recipe.url, Astro.site),
+  imageUrl: absoluteUrl(ogImage.src, Astro.site),
+  toTaste: strings.recipe.toTaste,
+  siteName: strings.siteName,
+});
+const temperature = new Intl.NumberFormat(locale, { style: "unit", unit: "celsius" });
+---
+
+<BaseLayout
+  locale={locale}
+  title={recipe.title}
+  description={recipe.description}
+  alternates={recipe.alternates}
+  image={ogImage.src}
+  ogType="article"
+  jsonLd={jsonLd}
+>
+  <article>
+    <header class="mb-6">
+      <p class="mb-2 text-sm font-semibold tracking-wide text-brand-700 uppercase">
+        {recipe.category.label}
+      </p>
+      <h1 class="mb-3 text-4xl font-bold sm:text-5xl">{recipe.title}</h1>
+      <p class="max-w-3xl text-lg text-stone-700">{recipe.description}</p>
+      {(times.length > 0 || recipe.tags.length > 0) && (
+        <dl class="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm">
+          {times.map((entry) => (
+            <div class="flex gap-1">
+              <dt class="text-stone-600">{entry.label}:</dt>
+              <dd class="font-semibold">{strings.recipe.minutes(entry.minutes)}</dd>
+            </div>
+          ))}
+          {times.length > 1 && (
+            <div class="flex gap-1">
+              <dt class="text-stone-600">{strings.recipe.time.total}:</dt>
+              <dd class="font-semibold">{strings.recipe.minutes(total)}</dd>
+            </div>
+          )}
+        </dl>
+      )}
+      {recipe.tags.length > 0 && (
+        <ul class="mt-4 flex flex-wrap gap-2" aria-label={strings.recipes.tagsLabel}>
+          {recipe.tags.map((tag) => (
+            <li class="rounded-full bg-stone-200 px-3 py-0.5 text-sm text-stone-800">
+              {tag.label}
+            </li>
+          ))}
+        </ul>
+      )}
+    </header>
+
+    <Picture
+      src={recipe.cover.image}
+      alt={recipe.cover.alt}
+      widths={[480, 800, 1200, 1600]}
+      sizes="(min-width: 1024px) 992px, 100vw"
+      formats={["avif", "webp"]}
+      fallbackFormat="jpg"
+      loading="eager"
+      fetchpriority="high"
+      class="mb-8 aspect-[3/2] w-full rounded-2xl object-cover lg:aspect-[2/1]"
+    />
+
+    <div class="grid gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(0,3fr)]">
+      <div class="lg:sticky lg:top-4 lg:self-start">
+        <RecipeIngredients
+          client:load
+          locale={locale}
+          baseServings={recipe.servings}
+          groups={recipe.ingredientGroups}
+          labels={{
+            heading: strings.recipe.ingredients,
+            servings: strings.recipe.servings,
+            decrease: strings.recipe.decreaseServings,
+            increase: strings.recipe.increaseServings,
+            reset: strings.recipe.resetServings,
+            toTaste: strings.recipe.toTaste,
+            copy: strings.recipe.copyIngredients,
+            copied: strings.recipe.copied,
+            copyFailed: strings.recipe.copyFailed,
+            checklistHint: strings.recipe.checklistHint,
+          }}
+        />
+      </div>
+
+      <section aria-labelledby="steps-heading">
+        <h2 id="steps-heading" class="mb-4 text-2xl font-bold">
+          {strings.recipe.preparation}
+        </h2>
+        <ol class="space-y-6">
+          {recipe.steps.map((step, index) => (
+            <li class="flex gap-4">
+              <span
+                class="flex size-9 shrink-0 items-center justify-center rounded-full bg-brand-600 font-bold text-white"
+                aria-hidden="true"
+              >
+                {index + 1}
+              </span>
+              <div class="min-w-0 flex-1 pt-1">
+                <h3 class="sr-only">{strings.recipe.step(index + 1)}</h3>
+                <p class="text-lg leading-relaxed">{step.text}</p>
+                {(step.durationMinutes || step.temperatureCelsius) && (
+                  <p class="mt-1 flex flex-wrap gap-x-4 text-sm text-stone-600">
+                    {step.durationMinutes && (
+                      <span>
+                        ⏱ {strings.recipe.stepDuration}:{" "}
+                        {strings.recipe.minutes(step.durationMinutes)}
+                      </span>
+                    )}
+                    {step.temperatureCelsius && (
+                      <span>
+                        🌡 {strings.recipe.temperature}:{" "}
+                        {temperature.format(step.temperatureCelsius)}
+                      </span>
+                    )}
+                  </p>
+                )}
+                {step.image && (
+                  <Picture
+                    src={step.image.image}
+                    alt={step.image.alt}
+                    widths={[480, 800]}
+                    sizes="(min-width: 1024px) 560px, 100vw"
+                    formats={["avif", "webp"]}
+                    fallbackFormat="jpg"
+                    loading="lazy"
+                    class="mt-3 w-full rounded-lg"
+                  />
+                )}
+              </div>
+            </li>
+          ))}
+        </ol>
+
+        {recipe.notes.length > 0 && (
+          <aside
+            class="mt-8 rounded-xl bg-brand-50 p-5 ring-1 ring-brand-100"
+            aria-labelledby="notes-heading"
+          >
+            <h2 id="notes-heading" class="mb-2 text-xl font-bold">
+              {strings.recipe.notes}
+            </h2>
+            <ul class="list-disc space-y-1 pl-5">
+              {recipe.notes.map((note) => (
+                <li>{note}</li>
+              ))}
+            </ul>
+          </aside>
+        )}
+      </section>
+    </div>
+
+    <RecipeGallery images={recipe.gallery} strings={strings} />
+  </article>
+</BaseLayout>
