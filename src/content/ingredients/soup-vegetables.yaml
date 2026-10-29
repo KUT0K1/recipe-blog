@@ -1,0 +1,6 @@
+id: soup-vegetables
+category: vegetables
+names:
+  de: { singular: Suppengemüse }
+  en: { singular: soup vegetables }
+defaultUnit: bunch

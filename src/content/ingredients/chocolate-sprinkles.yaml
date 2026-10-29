@@ -1,0 +1,6 @@
+id: chocolate-sprinkles
+category: baking
+names:
+  de: { singular: Schokostreusel }
+  en: { singular: chocolate sprinkles }
+defaultUnit: g

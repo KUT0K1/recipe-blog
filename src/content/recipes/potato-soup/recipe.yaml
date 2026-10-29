@@ -1,0 +1,22 @@
+id: potato-soup
+servings: 6
+category: soups
+tags: [potato]
+time:
+  cookingMinutes: 25
+images:
+  cover: cover.webp
+ingredients:
+  - { id: potato, amount: 900, unit: g }
+  - { id: soup-vegetables, amount: 1, unit: bunch }
+  - { id: vegetable-stock, amount: 1, unit: l }
+  - { id: milk, amount: 350, unit: ml }
+  - { id: salt, amount: null, unit: null }
+  - { id: pepper, amount: null, unit: null }
+  - { id: sausages, amount: 6, amountMax: 8, unit: piece }
+steps:
+  - id: prepare-vegetables
+  - id: simmer
+    durationMinutes: 25
+  - id: blend
+  - id: serve

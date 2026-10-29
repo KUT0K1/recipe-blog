@@ -1,0 +1,32 @@
+id: cheese-oregano-baguette
+servings: 4
+yieldUnit: pieces
+category: baking
+tags: [bread, yeast-dough, vegetarian]
+time:
+  restingMinutes: 60
+  cookingMinutes: 25
+images:
+  cover: cover.webp
+ingredients:
+  - { id: flour, group: dough, amount: 750, unit: g }
+  - { id: water, group: dough, amount: 400, unit: ml }
+  - { id: olive-oil, group: dough, amount: 120, unit: ml }
+  - { id: salt, group: dough, amount: 2, unit: tsp }
+  - { id: sugar, group: dough, amount: 2, unit: tsp }
+  - { id: yeast, group: dough, amount: 1, unit: cube }
+  - { id: parmesan, group: topping, amount: 90, unit: g }
+  - { id: oregano, group: topping, amount: 3, unit: tsp }
+steps:
+  - id: activate-yeast
+    durationMinutes: 5
+  - id: knead
+    durationMinutes: 10
+  - id: first-rise
+    durationMinutes: 45
+  - id: shape
+    durationMinutes: 15
+  - id: top
+  - id: bake
+    durationMinutes: 25
+    temperatureCelsius: 180

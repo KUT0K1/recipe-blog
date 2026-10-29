@@ -1,0 +1,6 @@
+id: ground-hazelnuts
+category: baking
+names:
+  de: { singular: gemahlene Haselnüsse }
+  en: { singular: ground hazelnuts }
+defaultUnit: g

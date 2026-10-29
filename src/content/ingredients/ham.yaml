@@ -1,0 +1,6 @@
+id: ham
+category: meat
+names:
+  de: { singular: Schinken }
+  en: { singular: ham }
+defaultUnit: g

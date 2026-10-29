@@ -1,0 +1,21 @@
+id: pizza-rolls
+category: snacks
+tags: [pizza, quick]
+time:
+  cookingMinutes: 10
+images:
+  cover: cover.webp
+ingredients:
+  - { id: bake-off-rolls, amount: null, unit: null }
+  - { id: salami, amount: null, unit: null }
+  - { id: ham, amount: null, unit: null }
+  - { id: cream, amount: null, unit: null }
+  - { id: grated-cheese, amount: null, unit: null }
+  - { id: salt, amount: null, unit: null }
+  - { id: pepper, amount: null, unit: null }
+  - { id: pizza-seasoning, amount: null, unit: null }
+steps:
+  - id: prepare-topping
+  - id: bake
+    durationMinutes: 10
+    temperatureCelsius: 160

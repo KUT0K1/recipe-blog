@@ -1,0 +1,6 @@
+id: potato
+category: vegetables
+names:
+  de: { singular: Kartoffel, plural: Kartoffeln }
+  en: { singular: potato, plural: potatoes }
+defaultUnit: g

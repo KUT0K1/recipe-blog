@@ -1,0 +1,6 @@
+id: baking-powder
+category: baking
+names:
+  de: { singular: Backpulver }
+  en: { singular: baking powder }
+defaultUnit: packet

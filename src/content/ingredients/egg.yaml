@@ -1,0 +1,6 @@
+id: egg
+category: dairy
+names:
+  de: { singular: Ei, plural: Eier }
+  en: { singular: egg, plural: eggs }
+defaultUnit: piece

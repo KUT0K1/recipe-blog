@@ -1,0 +1,6 @@
+id: flour
+category: baking
+names:
+  de: { singular: Mehl }
+  en: { singular: plain flour }
+defaultUnit: g

@@ -1,0 +1,5 @@
+id: pizza-seasoning
+category: spices
+names:
+  de: { singular: Pizzagewürz }
+  en: { singular: pizza seasoning }

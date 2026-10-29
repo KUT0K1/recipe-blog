@@ -1,0 +1,6 @@
+id: tomato-paste
+category: basics
+names:
+  de: { singular: Tomatenmark }
+  en: { singular: tomato purée }
+defaultUnit: tbsp

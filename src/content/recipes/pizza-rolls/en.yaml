@@ -1,0 +1,14 @@
+locale: en
+slug: pizza-rolls
+title: Pizza Rolls
+description: Part-baked rolls topped with a mix of salami, ham, cream and cheese – quick to make.
+imageAlt:
+  cover.webp: Placeholder image for the pizza rolls
+ingredientNotes:
+  salami: to taste, or e.g. mushrooms
+  cream: whipping cream, to taste
+steps:
+  prepare-topping: Dice the salami, ham etc. and put them in a bowl. Add the cream and grated cheese, season with salt, pepper and pizza seasoning and stir well.
+  bake: Preheat the oven to about 160 °C. Cut the rolls in half and spread with the mixture. Once all halves are topped, bake at about 160 °C for 10 minutes.
+notes:
+  - Amounts depend on the number of rolls – just mix to taste.

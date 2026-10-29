@@ -1,0 +1,6 @@
+id: yeast
+category: baking
+names:
+  de: { singular: Hefe }
+  en: { singular: fresh yeast }
+defaultUnit: cube

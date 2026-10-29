@@ -1,0 +1,6 @@
+id: onion
+category: vegetables
+names:
+  de: { singular: Zwiebel, plural: Zwiebeln }
+  en: { singular: onion, plural: onions }
+defaultUnit: piece

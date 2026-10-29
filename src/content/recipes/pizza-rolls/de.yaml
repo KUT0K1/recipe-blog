@@ -1,0 +1,14 @@
+locale: de
+slug: pizzabroetchen
+title: Pizzabrötchen
+description: Aufbackbrötchen mit einer Masse aus Salami, Schinken, Sahne und Käse – schnell gemacht.
+imageAlt:
+  cover.webp: Platzhalterbild für die Pizzabrötchen
+ingredientNotes:
+  salami: nach Belieben, alternativ z. B. Champignons
+  cream: Schlagsahne, nach Belieben
+steps:
+  prepare-topping: Salami, Schinken usw. in Würfel schneiden und in eine Schüssel geben. Sahne und Reibekäse dazugeben, mit Salz, Pfeffer und Pizzagewürz abschmecken und gut umrühren.
+  bake: Den Ofen auf ca. 160 °C vorheizen. Die Brötchen aufschneiden und mit der Masse belegen. Wenn alle Hälften belegt sind, bei ca. 160 °C 10 Minuten backen.
+notes:
+  - Die Mengen richten sich nach der Anzahl der Brötchen – einfach nach Belieben mischen.

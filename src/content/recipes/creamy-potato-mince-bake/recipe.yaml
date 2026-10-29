@@ -1,0 +1,33 @@
+id: creamy-potato-mince-bake
+servings: 1
+category: main-dishes
+tags: [casserole, potato, minced-meat]
+time:
+  cookingMinutes: 25
+images:
+  cover: cover.webp
+ingredients:
+  - { id: potato, group: base, amount: 350, amountMax: 400, unit: g }
+  - { id: bacon, group: base, amount: 30, amountMax: 50, unit: g }
+  - { id: onion, group: base, amount: 0.5, amountMax: 1, unit: piece }
+  - { id: ground-meat, group: base, amount: 200, amountMax: 250, unit: g }
+  - { id: garlic, group: base, amount: 1, unit: clove }
+  - { id: frozen-vegetables, group: base, amount: 100, amountMax: 150, unit: g }
+  - { id: tomato-paste, group: base, amount: 1, unit: tsp }
+  - { id: paprika, group: base, amount: null, unit: null }
+  - { id: marjoram, group: base, amount: null, unit: null }
+  - { id: cream, group: sauce, amount: 100, unit: ml }
+  - { id: milk, group: sauce, amount: 100, unit: ml }
+  - { id: vegetable-stock, group: sauce, amount: 50, unit: ml }
+  - { id: salt, group: sauce, amount: null, unit: null }
+  - { id: pepper, group: sauce, amount: null, unit: null }
+  - { id: nutmeg, group: sauce, amount: null, unit: null }
+  - { id: grated-cheese, group: topping, amount: 60, amountMax: 80, unit: g }
+steps:
+  - id: par-boil-potatoes
+    durationMinutes: 7
+  - id: brown-filling
+  - id: mix-sauce
+  - id: layer-and-bake
+    durationMinutes: 25
+    temperatureCelsius: 200

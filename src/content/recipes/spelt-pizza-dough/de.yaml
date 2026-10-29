@@ -1,0 +1,17 @@
+locale: de
+slug: dinkelpizza
+title: Dinkelpizza
+description: Pizzateig aus Dinkelmehl mit Olivenöl – Grundrezept für zwei Bleche.
+imageAlt:
+  cover.webp: Platzhalterbild für die Dinkelpizza
+ingredientNotes:
+  yeast: oder 1 Päckchen Trockenhefe
+  water: lauwarm
+steps:
+  activate-yeast: Wasser, Hefe und Zucker verrühren und ca. 5 Minuten ziehen lassen.
+  knead: Mehl, Salz und Hefewasser in eine Schüssel geben und verkneten. Anschließend das Olivenöl hinzufügen und mindestens 10 Minuten mit dem Knethaken kneten (20 Minuten mit der Hand).
+  bulk-rise: Den Teig mindestens 30 Minuten abgedeckt bei Raumtemperatur gehen lassen (Stockgare).
+  divide-and-proof: Den Teig in so viele Portionen teilen, wie Bleche gebacken werden, und mindestens eine weitere Stunde gehen lassen (Stückgare).
+  bake: Ausrollen, nach Belieben belegen und bei 220 °C Umluft ca. 10–15 Minuten backen.
+notes:
+  - "Originalmengen für 3 Bleche: 1 Würfel Hefe (oder 2 Päckchen Trockenhefe), 1 TL Zucker, 5 TL Salz, 7 EL Olivenöl, 1 kg Dinkelmehl, 640 ml Wasser."

@@ -1,0 +1,5 @@
+id: pepper
+category: spices
+names:
+  de: { singular: Pfeffer }
+  en: { singular: pepper }

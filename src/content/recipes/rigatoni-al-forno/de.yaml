@@ -1,0 +1,20 @@
+locale: de
+slug: rigatoni-al-forno
+title: Rigatoni al Forno
+description: Überbackene Rigatoni mit cremiger Hackfleisch-Tomaten-Sahnesauce, Kochschinken und Edamer.
+imageAlt:
+  cover.webp: Platzhalterbild für Rigatoni al Forno
+ingredientGroups:
+  sauce: Sauce
+  pasta: Nudeln
+  topping: Zum Überbacken
+ingredientNotes:
+  olive-oil: zum Anbraten
+  tomato-paste: davon 1–2 EL zum Anrösten
+  edam: gerieben
+steps:
+  brown-meat: Etwas Olivenöl erhitzen, das Hackfleisch hineingeben und unter Rühren braten, bis es braun und krümelig ist. 1–2 EL Tomatenmark unterrühren und kurz anrösten.
+  make-sauce: Mit der Gemüsebrühe ablöschen, die Sahne hinzufügen und aufkochen lassen. Das restliche Tomatenmark unterrühren und die Sauce mindestens 30 Minuten köcheln lassen. Anschließend die Butter darin zerlassen und die Sauce mit Salz, Cayennepfeffer und Parmesan abschmecken.
+  cook-pasta: Die Rigatoni nach Packungsanweisung in reichlich Salzwasser sehr bissfest kochen, dabei gelegentlich umrühren. In ein Sieb abgießen, abtropfen lassen und zurück in den Topf geben.
+  combine: Den Kochschinken würfeln und mit in den Topf geben. Die Sauce dazugießen und alles vermischen.
+  bake: Den Backofen auf 180 °C vorheizen. Die Nudelmischung in eine große Auflaufform geben oder auf mehrere kleine Formen verteilen. Den geriebenen Käse darüberstreuen und auf mittlerer Schiene überbacken, bis der Käse goldgelb ist.

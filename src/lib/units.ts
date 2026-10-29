@@ -9,7 +9,21 @@ import type { Locale } from "../config/locales";
  */
 export type DisplayStrategy = "metric" | "fraction";
 
-export const unitIds = ["g", "kg", "ml", "l", "piece", "clove", "tbsp", "tsp", "pinch"] as const;
+export const unitIds = [
+  "g",
+  "kg",
+  "ml",
+  "l",
+  "piece",
+  "clove",
+  "tbsp",
+  "tsp",
+  "pinch",
+  "cup",
+  "cube",
+  "packet",
+  "bunch",
+] as const;
 export type UnitId = (typeof unitIds)[number];
 
 interface UnitLabel {
@@ -50,6 +64,24 @@ export const units: Record<UnitId, UnitDefinition> = {
   pinch: {
     strategy: "fraction",
     labels: { de: { one: "Prise", other: "Prisen" }, en: { one: "pinch", other: "pinches" } },
+  },
+  /** A cup or tub used as a measure (e.g. the empty sour-cream tub), not a fixed volume. */
+  cup: {
+    strategy: "fraction",
+    labels: { de: same("Becher"), en: { one: "cup", other: "cups" } },
+  },
+  /** Fresh yeast cube (42 g in Germany). */
+  cube: {
+    strategy: "fraction",
+    labels: { de: same("Würfel"), en: { one: "cube", other: "cubes" } },
+  },
+  packet: {
+    strategy: "fraction",
+    labels: { de: same("Päckchen"), en: { one: "packet", other: "packets" } },
+  },
+  bunch: {
+    strategy: "fraction",
+    labels: { de: same("Bund"), en: { one: "bunch", other: "bunches" } },
   },
 };
 

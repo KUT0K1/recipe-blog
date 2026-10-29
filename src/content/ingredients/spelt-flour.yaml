@@ -1,0 +1,6 @@
+id: spelt-flour
+category: baking
+names:
+  de: { singular: Dinkelmehl }
+  en: { singular: spelt flour }
+defaultUnit: g

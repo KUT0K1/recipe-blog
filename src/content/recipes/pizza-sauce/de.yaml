@@ -1,0 +1,12 @@
+locale: de
+slug: pizzasosse
+title: Pizzasoße
+description: Einfache Tomatensoße mit Zwiebel und Kräutern als Grundlage für selbstgemachte Pizza.
+imageAlt:
+  cover.webp: Platzhalterbild für die Pizzasoße
+ingredientNotes:
+  olive-oil: zum Andünsten
+steps:
+  saute-onion: Zwiebel schälen, fein hacken und in etwas Olivenöl glasig andünsten.
+  add-tomatoes: Mit den passierten Tomaten ablöschen und Tomatenmark, Zucker, Kräuter, Salz und Pfeffer hinzugeben.
+  reduce: Bei kleiner bis mittlerer Hitze köcheln und einreduzieren lassen.

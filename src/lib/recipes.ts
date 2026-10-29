@@ -3,7 +3,7 @@ import { getCollection } from "astro:content";
 import { locales, type Locale } from "../config/locales";
 import { ContentValidationError, lineKey, validateContent } from "./content-validation";
 import { getRecipeImage, recipeImages } from "./image-registry";
-import type { Ingredient, Recipe, TaxonomyLabels, Translation } from "./schemas";
+import type { Ingredient, Recipe, TaxonomyLabels, Translation, YieldUnit } from "./schemas";
 import type { UnitId } from "./units";
 import { paths } from "./urls";
 
@@ -11,6 +11,7 @@ import { paths } from "./urls";
 export interface IngredientView {
   key: string;
   amount: number | null;
+  amountMax?: number;
   unit: UnitId | null;
   scalable: boolean;
   singular: string;
@@ -38,7 +39,8 @@ export interface LocalizedRecipe {
   url: string;
   title: string;
   description: string;
-  servings: number;
+  servings?: number;
+  yieldUnit: YieldUnit;
   category: { id: string; label: string };
   tags: { id: string; label: string }[];
   time: Recipe["time"];
@@ -146,6 +148,7 @@ function localize(
     group.lines.push({
       key,
       amount: line.amount,
+      ...(line.amountMax !== undefined ? { amountMax: line.amountMax } : {}),
       unit: line.unit,
       scalable: line.scalable ?? true,
       singular,
@@ -168,7 +171,8 @@ function localize(
     url: paths.recipe(locale, t.slug),
     title: t.title,
     description: t.description,
-    servings: core.servings,
+    ...(core.servings !== undefined ? { servings: core.servings } : {}),
+    yieldUnit: core.yieldUnit,
     category: { id: core.category, label: data.categories.get(core.category)?.[locale] ?? "" },
     tags: core.tags.map((id) => ({ id, label: data.tags.get(id)?.[locale] ?? id })),
     time: core.time,

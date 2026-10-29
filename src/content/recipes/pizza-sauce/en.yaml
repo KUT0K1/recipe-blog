@@ -1,0 +1,12 @@
+locale: en
+slug: pizza-sauce
+title: Pizza Sauce
+description: Simple tomato sauce with onion and herbs as a base for homemade pizza.
+imageAlt:
+  cover.webp: Placeholder image for the pizza sauce
+ingredientNotes:
+  olive-oil: for sautéing
+steps:
+  saute-onion: Peel and finely chop the onion and sauté in a little olive oil until translucent.
+  add-tomatoes: Add the passata, then the tomato purée, sugar, herbs, salt and pepper.
+  reduce: Simmer over low to medium heat until reduced.

@@ -1,0 +1,27 @@
+id: rigatoni-al-forno
+servings: 4
+category: main-dishes
+tags: [pasta, casserole, minced-meat]
+images:
+  cover: cover.webp
+ingredients:
+  - { id: olive-oil, group: sauce, amount: null, unit: null }
+  - { id: ground-meat, group: sauce, amount: 500, unit: g }
+  - { id: tomato-paste, group: sauce, amount: 9, unit: tbsp }
+  - { id: vegetable-stock, group: sauce, amount: 600, unit: ml }
+  - { id: cream, group: sauce, amount: 600, unit: ml }
+  - { id: butter, group: sauce, amount: 3, unit: tbsp }
+  - { id: parmesan, group: sauce, amount: 3, unit: tbsp }
+  - { id: salt, group: sauce, amount: null, unit: null }
+  - { id: cayenne-pepper, group: sauce, amount: null, unit: null }
+  - { id: rigatoni, group: pasta, amount: 500, unit: g }
+  - { id: cooked-ham, group: pasta, amount: 400, unit: g }
+  - { id: edam, group: topping, amount: 200, unit: g }
+steps:
+  - id: brown-meat
+  - id: make-sauce
+    durationMinutes: 30
+  - id: cook-pasta
+  - id: combine
+  - id: bake
+    temperatureCelsius: 180

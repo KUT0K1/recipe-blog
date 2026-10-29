@@ -31,7 +31,7 @@ Build and maintain a static multilingual recipe blog with Astro, React islands, 
 ## Workflow for adding recipes
 
 1. Choose a stable English-like kebab-case technical recipe ID, unique across the repository.
-2. Create `src/content/recipes/<id>/recipe.yaml` with numeric quantities, stable ingredient IDs, stable step IDs, and image filenames.
+2. Create `src/content/recipes/<id>/recipe.yaml` with numeric quantities, stable ingredient IDs, stable step IDs, and image filenames. Use `amountMax` for ranges ("2–3 EL"), `yieldUnit` when the recipe yields trays, loaf tins or pieces instead of servings, and omit `servings` only when the source gives no yield at all.
 3. Add any missing ingredient definitions to `src/content/ingredients/<ingredient-id>.yaml`, including names for every locale in which the recipe will be published. Provide `plural` for countable items and `withUnit` when the form after a unit differs from the plural (e.g. `200 g Hähnchenbrust`).
    New categories or tags go into `src/content/categories.yaml` / `src/content/tags.yaml` with labels for every published locale.
 4. Add mandatory `de.yaml`, translating every step and providing localized alt text for all images.

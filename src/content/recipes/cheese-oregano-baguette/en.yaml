@@ -1,0 +1,19 @@
+locale: en
+slug: cheese-oregano-baguette
+title: Cheese and Oregano Baguette
+description: Four crusty olive oil baguettes made with yeast dough and topped with cheese and oregano.
+imageAlt:
+  cover.webp: Placeholder image for the cheese and oregano baguette
+ingredientGroups:
+  dough: Dough
+  topping: Topping
+ingredientNotes:
+  water: lukewarm
+  parmesan: or Gouda
+steps:
+  activate-yeast: Stir the water, yeast and sugar together and leave for about 5 minutes.
+  knead: Put the flour, salt and yeast water in a bowl and mix. Then add the olive oil and knead with a dough hook for at least 10 minutes (20 minutes by hand).
+  first-rise: Cover the dough and leave it to rise at room temperature for at least 45 minutes.
+  shape: Divide the dough into 4 equal portions, shape into baguettes and leave to rise for another 15 minutes. Meanwhile, mix the cheese and oregano.
+  top: Spray or brush the baguettes with water and sprinkle the cheese and oregano mixture over them.
+  bake: Bake at 180 °C (conventional) for about 25 minutes.
