@@ -52,22 +52,22 @@ const temperature = new Intl.NumberFormat(locale, { style: "unit", unit: "celsiu
 >
   <article>
     <header class="mb-6">
-      <p class="mb-2 text-sm font-semibold tracking-wide text-brand-700 uppercase">
+      <p class="mb-2 text-sm font-semibold tracking-wide text-brand uppercase">
         {recipe.category.label}
       </p>
       <h1 class="mb-3 text-4xl font-bold sm:text-5xl">{recipe.title}</h1>
-      <p class="max-w-3xl text-lg text-stone-700">{recipe.description}</p>
+      <p class="max-w-3xl text-lg text-fg-soft">{recipe.description}</p>
       {(times.length > 0 || recipe.tags.length > 0) && (
         <dl class="mt-4 flex flex-wrap gap-x-6 gap-y-2 text-sm">
           {times.map((entry) => (
             <div class="flex gap-1">
-              <dt class="text-stone-600">{entry.label}:</dt>
+              <dt class="text-fg-muted">{entry.label}:</dt>
               <dd class="font-semibold">{strings.recipe.minutes(entry.minutes)}</dd>
             </div>
           ))}
           {times.length > 1 && (
             <div class="flex gap-1">
-              <dt class="text-stone-600">{strings.recipe.time.total}:</dt>
+              <dt class="text-fg-muted">{strings.recipe.time.total}:</dt>
               <dd class="font-semibold">{strings.recipe.minutes(total)}</dd>
             </div>
           )}
@@ -76,9 +76,7 @@ const temperature = new Intl.NumberFormat(locale, { style: "unit", unit: "celsiu
       {recipe.tags.length > 0 && (
         <ul class="mt-4 flex flex-wrap gap-2" aria-label={strings.recipes.tagsLabel}>
           {recipe.tags.map((tag) => (
-            <li class="rounded-full bg-stone-200 px-3 py-0.5 text-sm text-stone-800">
-              {tag.label}
-            </li>
+            <li class="rounded-full bg-chip px-3 py-0.5 text-sm text-fg">{tag.label}</li>
           ))}
         </ul>
       )}
@@ -126,7 +124,7 @@ const temperature = new Intl.NumberFormat(locale, { style: "unit", unit: "celsiu
           {recipe.steps.map((step, index) => (
             <li class="flex gap-4">
               <span
-                class="flex size-9 shrink-0 items-center justify-center rounded-full bg-brand-600 font-bold text-white"
+                class="flex size-9 shrink-0 items-center justify-center rounded-full bg-brand-solid font-bold text-white"
                 aria-hidden="true"
               >
                 {index + 1}
@@ -135,7 +133,7 @@ const temperature = new Intl.NumberFormat(locale, { style: "unit", unit: "celsiu
                 <h3 class="sr-only">{strings.recipe.step(index + 1)}</h3>
                 <p class="text-lg leading-relaxed">{step.text}</p>
                 {(step.durationMinutes || step.temperatureCelsius) && (
-                  <p class="mt-1 flex flex-wrap gap-x-4 text-sm text-stone-600">
+                  <p class="mt-1 flex flex-wrap gap-x-4 text-sm text-fg-muted">
                     {step.durationMinutes && (
                       <span>
                         ⏱ {strings.recipe.stepDuration}:{" "}
@@ -169,7 +167,7 @@ const temperature = new Intl.NumberFormat(locale, { style: "unit", unit: "celsiu
 
         {recipe.notes.length > 0 && (
           <aside
-            class="mt-8 rounded-xl bg-brand-50 p-5 ring-1 ring-brand-100"
+            class="mt-8 rounded-xl bg-brand-soft p-5 ring-1 ring-brand-tint"
             aria-labelledby="notes-heading"
           >
             <h2 id="notes-heading" class="mb-2 text-xl font-bold">

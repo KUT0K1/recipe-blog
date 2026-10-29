@@ -19,9 +19,9 @@ const alternates = Object.fromEntries(locales.map((l) => [l, paths.home(l)]));
 ---
 
 <BaseLayout locale={locale} title={strings.siteName} alternates={alternates}>
-  <section class="mb-10 rounded-2xl bg-brand-50 px-6 py-10 ring-1 ring-brand-100">
+  <section class="mb-10 rounded-2xl bg-brand-soft px-6 py-10 ring-1 ring-brand-tint">
     <h1 class="mb-3 text-4xl font-bold">{strings.home.title}</h1>
-    <p class="max-w-2xl text-lg text-stone-700">{strings.home.intro}</p>
+    <p class="max-w-2xl text-lg text-fg-soft">{strings.home.intro}</p>
   </section>
 
   <section aria-labelledby="latest-heading">
@@ -34,7 +34,7 @@ const alternates = Object.fromEntries(locales.map((l) => [l, paths.home(l)]));
       </a>
     </div>
     {cards.length === 0 ? (
-      <p class="py-8 text-center text-stone-600">{strings.recipes.empty}</p>
+      <p class="py-8 text-center text-fg-muted">{strings.recipes.empty}</p>
     ) : (
       <ul class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {cards.map((card) => (

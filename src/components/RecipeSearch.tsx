@@ -63,7 +63,7 @@ export default function RecipeSearch({ entries, categories, tags, labels }: Prop
     <div>
       <form
         role="search"
-        className="mb-6 grid gap-4 rounded-xl bg-white p-4 ring-1 ring-stone-200 sm:grid-cols-[2fr_1fr]"
+        className="mb-6 grid gap-4 rounded-xl bg-surface p-4 ring-1 ring-line sm:grid-cols-[2fr_1fr]"
         onSubmit={(e) => e.preventDefault()}
       >
         <div>
@@ -76,7 +76,7 @@ export default function RecipeSearch({ entries, categories, tags, labels }: Prop
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder={labels.placeholder}
-            className="h-11 w-full rounded-md border border-stone-300 px-3"
+            className="h-11 w-full rounded-md border border-line-strong px-3"
           />
         </div>
         <div>
@@ -87,7 +87,7 @@ export default function RecipeSearch({ entries, categories, tags, labels }: Prop
             id={`${id}-c`}
             value={category}
             onChange={(e) => setCategory(e.target.value)}
-            className="h-11 w-full rounded-md border border-stone-300 bg-white px-3"
+            className="h-11 w-full rounded-md border border-line-strong bg-surface px-3"
           >
             <option value="">{labels.allCategories}</option>
             {categories.map((c) => (
@@ -107,7 +107,7 @@ export default function RecipeSearch({ entries, categories, tags, labels }: Prop
                   type="button"
                   aria-pressed={activeTags.has(tag.id)}
                   onClick={() => toggleTag(tag.id)}
-                  className="rounded-full border border-stone-300 bg-white px-3 py-1 text-sm hover:bg-stone-100 aria-pressed:border-brand-600 aria-pressed:bg-brand-100 aria-pressed:text-brand-900"
+                  className="rounded-full border border-line-strong bg-surface px-3 py-1 text-sm hover:bg-surface-hover aria-pressed:border-brand aria-pressed:bg-brand-tint aria-pressed:text-brand-ink"
                 >
                   {tag.label}
                 </button>
@@ -118,13 +118,13 @@ export default function RecipeSearch({ entries, categories, tags, labels }: Prop
       </form>
 
       <div className="mb-4 flex items-center justify-between gap-4">
-        <p role="status" className="text-stone-600">
+        <p role="status" className="text-fg-muted">
           {countLabel(labels.resultCount, results.length)}
         </p>
         {filtered && (
           <button
             type="button"
-            className="text-sm text-brand-700 underline"
+            className="text-sm text-brand underline"
             onClick={() => {
               setQuery("");
               setCategory("");
@@ -137,7 +137,7 @@ export default function RecipeSearch({ entries, categories, tags, labels }: Prop
       </div>
 
       {results.length === 0 ? (
-        <p className="py-8 text-center text-stone-600">{labels.noResults}</p>
+        <p className="py-8 text-center text-fg-muted">{labels.noResults}</p>
       ) : (
         <ul className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {results.map((entry) => (

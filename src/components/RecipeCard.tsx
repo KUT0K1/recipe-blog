@@ -9,7 +9,7 @@ export interface RecipeCardData {
 
 export default function RecipeCard({ card }: { card: RecipeCardData }) {
   return (
-    <article className="group relative flex h-full flex-col overflow-hidden rounded-xl bg-white shadow-sm ring-1 ring-stone-200 transition hover:shadow-md">
+    <article className="group relative flex h-full flex-col overflow-hidden rounded-xl bg-surface shadow-sm ring-1 ring-line transition hover:shadow-md">
       <img
         src={card.image.src}
         srcSet={card.image.srcset}
@@ -23,15 +23,12 @@ export default function RecipeCard({ card }: { card: RecipeCardData }) {
       />
       <div className="flex flex-1 flex-col gap-2 p-4">
         <h3 className="text-xl font-bold">
-          <a
-            href={card.url}
-            className="text-stone-900 after:absolute after:inset-0 hover:underline"
-          >
+          <a href={card.url} className="text-fg after:absolute after:inset-0 hover:underline">
             {card.title}
           </a>
         </h3>
-        <p className="text-stone-700">{card.description}</p>
-        <p className="mt-auto text-sm text-stone-600">{card.meta.join(" · ")}</p>
+        <p className="text-fg-soft">{card.description}</p>
+        <p className="mt-auto text-sm text-fg-muted">{card.meta.join(" · ")}</p>
       </div>
     </article>
   );

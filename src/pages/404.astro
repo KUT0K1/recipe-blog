@@ -10,13 +10,13 @@ const strings = t(defaultLocale);
 
 <BaseLayout locale={defaultLocale} title={strings.notFound.title} noindex>
   <div class="mx-auto max-w-xl py-12 text-center">
-    <p class="mb-2 text-6xl font-bold text-brand-600" aria-hidden="true">
+    <p class="mb-2 text-6xl font-bold text-brand" aria-hidden="true">
       404
     </p>
     {locales.map((l) => (
       <section lang={l} class="mb-8">
         <h1 class="mb-2 text-2xl font-bold">{t(l).notFound.title}</h1>
-        <p class="mb-3 text-stone-700">{t(l).notFound.body}</p>
+        <p class="mb-3 text-fg-soft">{t(l).notFound.body}</p>
         <a href={paths.recipes(l)} class="font-semibold">
           {t(l).notFound.back} →
         </a>

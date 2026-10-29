@@ -27,7 +27,7 @@ const full = await Promise.all(
             data-lightbox-item
             data-alt={img.alt}
             aria-label={strings.recipe.openImage(img.alt)}
-            class="block overflow-hidden rounded-lg ring-1 ring-stone-200"
+            class="block overflow-hidden rounded-lg ring-1 ring-line"
           >
             <Picture
               src={img.image}
@@ -56,21 +56,21 @@ const full = await Promise.all(
         <button
           type="button"
           data-lightbox-prev
-          class="rounded-md bg-white px-4 py-2 font-semibold"
+          class="rounded-md bg-surface px-4 py-2 font-semibold text-fg"
         >
           ‹ <span class="sr-only">{strings.lightbox.previous}</span>
         </button>
         <button
           type="button"
           data-lightbox-close
-          class="rounded-md bg-white px-4 py-2 font-semibold"
+          class="rounded-md bg-surface px-4 py-2 font-semibold text-fg"
         >
           {strings.lightbox.close}
         </button>
         <button
           type="button"
           data-lightbox-next
-          class="rounded-md bg-white px-4 py-2 font-semibold"
+          class="rounded-md bg-surface px-4 py-2 font-semibold text-fg"
         >
           <span class="sr-only">{strings.lightbox.next}</span> ›
         </button>
