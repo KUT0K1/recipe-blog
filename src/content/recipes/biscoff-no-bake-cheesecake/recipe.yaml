@@ -4,7 +4,7 @@ category: desserts
 tags: [cake, no-bake]
 time:
   preparationMinutes: 25
-  restingMinutes: 240
+  restingMinutes: 270
 images:
   cover: cover.webp
 ingredients:
@@ -39,3 +39,5 @@ steps:
   - id: whip-cream
   - id: assemble-and-chill
     durationMinutes: 240
+  - id: top-with-spread
+  - id: decorate
